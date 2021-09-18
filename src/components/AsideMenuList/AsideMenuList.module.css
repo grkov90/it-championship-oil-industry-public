@@ -1,0 +1,12 @@
+.AsideMenuItem {
+    margin-bottom: 3px;
+}
+.AsideMenuList {
+    overflow: auto;
+    overflow-x:hidden;
+}
+
+.Button {
+    height: auto;
+    white-space: normal;
+}

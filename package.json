@@ -1,18 +1,58 @@
 {
-  "name": "it-championship-oil-industry",
-  "version": "1.0.0",
-  "description": "",
+  "name": "tree-builder",
+  "version": "0.1.0",
   "private": true,
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "y^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@types/antd": "^1.0.0",
+    "antd": "^4.16.13",
+    "clsx": "^1.1.1",
+    "prop-types": "^15.7.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-hook-form": "^7.15.3",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.0.1"
+  },
   "scripts": {
-    "build": "webpack --mode=development",
-    "build-prod": "webpack --mode=production",
-    "obfuscate": "javascript-obfuscator ./dist/main.js --output ./dist/main.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "eslint-fix": "eslint --ext .js,.jsx,.ts,.tsx src/ --fix",
+    "eslint": "eslint --ext .js,.jsx,.ts,.tsx src/ --max-warnings 0"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "devDependencies": {
-    "html-webpack-plugin": "^5.3.2",
-    "javascript-obfuscator": "^2.19.0",
-    "webpack": "^5.52.0",
-    "webpack-cli": "^4.8.0"
-  },
-  "dependencies": {}
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb": "18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "3.4.0",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^1.7.0",
+    "prettier": "2.3.2"
+  }
 }

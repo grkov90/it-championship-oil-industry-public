@@ -1,0 +1,16 @@
+.ScenariosAsideMenu {
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 140px);
+    background: #e0f1ff;
+    overflow: auto;
+    overflow-x:hidden;
+}
+
+.ScenarioButton {
+    margin-bottom: 3px;
+}
+.ScenarioButton:nth-last-of-type(1) {
+    margin-bottom: 0;
+}

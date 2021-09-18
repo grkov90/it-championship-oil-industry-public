@@ -1,0 +1,12 @@
+.MenuList {
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 140px);
+    border: 3px solid #e0f1ff;
+    padding: 5px;
+}
+.TreeContent {
+    width: 100%;
+    height: calc(100vh - 140px);
+}
