@@ -1,70 +1,36 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Система: "Огонь"
+## Команда "Прометей" (ООО "Газпром-нефть ЦР")
 
-## Available Scripts
+![Команда "Прометей"](https://lh3.googleusercontent.com/fife/AAWUweXsZStZ6tTHwXKmAShH2QAPW9XhwBz0Wo_55Pl_G9vCpH73D0sFies9uHyTZjRiKtcyDlJv4cL16ToxUfoOd6ta4MFLzeXauXeTvPYndzVTmcnllqOUx7xZ7GsJD0zaNI1NfzVZ-BzrQg18i0qlBRD4Kfp59zLW3CxizqFUGw20hKaAS5SL9ZnfRHChocFptPmJI5DuwF1ymWt7_T7nmXoG6xzEdckBwMKx0-tVYQALQpgDrO1ffOzGg9Tuc7zuXatrzFNDj4m34w1euLm-i2aDRhgVTIHspC8RfKmichsknIoXZADo7Ddh9GXjYIUK4tDlZMFshK0NMZRQKJCaEijQF4LalIXXLvh3ZgKsSTK0aHL1oKRf-WS32bTXz2RM6y7WF5ab5d-gogSapBvmiRPNiUgkMOpEeZQ2CbjPdEZpgVD2snIP4RaHw8IVGHrb3tYCdEwx-uQCxWi8xy9em6TjKBpFA_JkM0W5P0irxy-GQvK_PJoV3LYqsq0BV3Z-mo0wZ-kuWLrQXVnuShi615K748CyFdprjr6a1sn5ZVg2E8mbU3V69TjHetpaQE77aSEGvaKGl2NypCBWswYOfkmhP_jfA_RBp9rDMCR8NiJrYW_6_LGbLhU_4lAYQPt22__4aAanwZ0vlzBMcp42mrCzZK_lEjDe4ILl1GEivZ96upjWvtiCQZdCqNGNA21b12ZhHzkVFjlSLPK50Crj-CD-oS0f2RgfvQ=w1920-h979-ft)
 
-In the project directory, you can run:
+## Видепрезентация
 
-### `yarn start`
+Благодарим экспертов за ценные комментарии на ХАКАТОНЕ, представляем вам Прототип системы обеспечения непрерывности Центра управления строительством скважин.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Цель прототипа
+Цель прототипа предоставить интерфейс для работы с математической моделью, попробовать оценить различные конфигурации ИТ-ресурсов и оценить различные сценарии отказов.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Реализация
+Веб-приложение, в которое заложены алгоритмы оценки ущерба и анализа различных сценариев без сохранения в базу данных. Пользователь может сохранять свои данные в файл, затем возвращаться к веб-приложению и продолжать работать с ранее сохраненными конфигурациями и сценариями, а так же делиться ими с другими пользователями. В решении использована сторонняя библиотека go.js для визуализации диаграммы дерева отказов.
 
-### `yarn test`
+## Поддержка
+Достаточно, чтобы функционировал веб-сервер с фронт-энд частью. Сложное конфигурирование фронт-энд части не требуется. На этапе MVP можно получать пользу от продукта без дополнительной регистрации и специального обучения пользователей. Интерфейс интуитивный.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Целевое видение системы
+Cистема клиент-серверного исполнения, многопользовательская, идентификация и авторизация пользователей через AD, распределение нагрузки при расчете, централизованное хранение данных. Stateless компоненты упакованы в контейнеры на корпоративной платформе контейнеризации. Statefull компонент - база данных - на корпоративной платформе виртуализации с организованной системой резервного копирования.
 
-### `yarn build`
+В целевом виде развертывание системы будет производится автоматически на основе созданных сценариев DSO. Аналогичным образом будет производится установка обновлений. В ходе сборки приложения подразумевается выполнение сценариев автоматического тестирования.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Целевое содержание функций системы:
+![Целевое содержание функций системы](https://lh5.googleusercontent.com/FYG4Y_2_6z-llnQ9VykDbNfFKZ8lzyi48Jz_clv5yFkogSHONL5atAkL7WTtzG3FDghgrrwFeR27pA=w1195-h979-rw)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Запуска проекта
+Для запуска проекта необходимо выполнить следующие команды:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+-  Установить зависимости:  
+`$ yarn`
+- Запустить сервер:  
+`$ yarn start`
+- После запуска сервера откроется браузер по адресу:  
+[http://localhost:3000](http://localhost:3000)
