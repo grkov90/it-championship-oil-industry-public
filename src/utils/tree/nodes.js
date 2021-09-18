@@ -8,8 +8,8 @@ export const NodeType = {
 };
 
 export const NodeTypeLabelMap = {
-  [NodeType.ItResource]: 'Ит ресурс',
-  [NodeType.ItService]: 'Ит сервис',
+  [NodeType.ItResource]: 'ИТ-ресурс',
+  [NodeType.ItService]: 'ИТ-сервис',
   [NodeType.BusinessFunction]: 'Бизнес функция',
   [NodeType.BusinessProcess]: 'Бизнес процесс',
   [NodeType.NegativeEvent]: 'Негативное событие',
@@ -22,6 +22,12 @@ function assert(...args) {
   // eslint-disable-next-line no-console
   console.assert(...args);
 }
+
+const currencyFormatter = new Intl.NumberFormat('ru-RU', {
+  style: 'currency',
+  maximumFractionDigits: 0,
+  currency: 'RUB',
+});
 
 export class Node {
   constructor(node) {
@@ -82,14 +88,12 @@ export class ItResourceNode extends Node {
   }
 
   label() {
-    return `ИТ-ресурс: ${this.name}
-    Проектное RTO: ${this.target.rtoTarget}`;
+    return `Проектное RTO: ${this.target.rtoTarget} ч.`;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-    Max RTO нижнего уровня: ${this.scenario.rtoTargetChildSum}
-    RTO: ${this.scenario.rtoTarget}`;
+    return `Max RTO нижнего уровня: ${this.scenario.rtoTargetChildSum} ч.
+    RTO: ${this.scenario.rtoTarget} ч.`;
   }
 
   export() {
@@ -122,12 +126,11 @@ export class ItServiceNode extends Node {
   }
 
   label() {
-    return `ИТ-услуга: ${this.name}`;
+    return ``;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-		Наибольший RTO: ${this.scenario.rtoTargetMax}`;
+    return `Наибольший RTO: ${this.scenario.rtoTargetMax} ч.`;
   }
 }
 
@@ -158,14 +161,12 @@ export class BusinessFunctionNode extends Node {
   }
 
   label() {
-    return `Бизнес функция: ${this.name}
-    Проектный RTO: ${this.target.rtoTarget}`;
+    return `Проектный RTO: ${this.target.rtoTarget} ч.`;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-    RTO: ${this.scenario.rtoTarget}
-		Время простоя: ${this.scenario.waitTimeTarget}`;
+    return `RTO: ${this.scenario.rtoTarget} ч.
+		Время простоя: ${this.scenario.waitTimeTarget} ч.`;
   }
 
   export() {
@@ -197,12 +198,11 @@ export class BusinessProcessNode extends Node {
   }
 
   label() {
-    return `Бизнес процесс: ${this.name}`;
+    return ``;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-		Максимальное время простоя: ${this.scenario.waitTimeTarget}`;
+    return `Максимальное время простоя: ${this.scenario.waitTimeTarget} ч.`;
   }
 }
 
@@ -236,12 +236,11 @@ export class NegativeEventNode extends Node {
   }
 
   label() {
-    return `Негативное событие: ${this.name}`;
+    return ``;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-    Потерянные деньги: ${this.scenario.damageMoney}`;
+    return `Потерянные деньги: ${currencyFormatter.format(this.scenario.damageMoney)}`;
   }
 
   export() {
@@ -274,12 +273,11 @@ export class MoneyNode extends Node {
   }
 
   label() {
-    return `Оценка ущерба: ${this.name}`;
+    return ``;
   }
 
   scenarioLabel() {
-    return `Сценарий: ${this.scenario.name}
-    Сумма потерянных денег: ${this.scenario.damageMoneySum}`;
+    return `Сумма потерянных денег: ${currencyFormatter.format(this.scenario.damageMoneySum)}`;
   }
 }
 

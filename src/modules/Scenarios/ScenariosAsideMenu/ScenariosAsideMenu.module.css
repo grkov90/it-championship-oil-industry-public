@@ -5,6 +5,7 @@
     background: #e0f1ff;
     overflow: auto;
     overflow-x:hidden;
+    padding: 6px
 }
 
 .Input {
@@ -18,4 +19,8 @@
 }
 .ScenarioButton:nth-last-of-type(1) {
     margin-bottom: 0;
+}
+
+.Divider {
+    margin: 6px 0;
 }

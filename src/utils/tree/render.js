@@ -2,8 +2,8 @@ import { faultTreeNodeDictionaryService } from 'services/FaultTreeNodeDictionary
 import { faultScenarioService } from 'services/FaultScenario.service';
 import { faultScenarioElementService } from 'services/FaultScenarioElement.service';
 import { faultTreeNodeService } from 'services/FaultTreeNode.service';
-import { NodeType, Tree } from './nodes';
-import * as go from './go-debug-hack';
+import { NodeType, Tree, NodeTypeLabelMap } from './nodes';
+import * as go from './diagram-lib';
 
 function log(...args) {
   // eslint-disable-next-line no-console
@@ -11,51 +11,222 @@ function log(...args) {
 }
 
 const nodeTypeColor = {
-  ItResource: '#bccad6',
-  ItService: '#f1e3dd',
-  BusinessFunction: '#cfe0e8',
-  BusinessProcess: '#b7d7e8',
-  NegativeEvent: '#87bdd8',
-  Money: '#daebe8',
+  ItResource: { fill: '#ffffff', text: '#000000' },
+  ItService: { fill: '#cfe2e9', text: '#000000' },
+  BusinessFunction: { fill: '#a6cdf4', text: '#000000' },
+  BusinessProcess: { fill: '#6ba9ef', text: '#000000' },
+  NegativeEvent: { fill: '#4286da', text: '#ffffff' },
+  Money: { fill: '#1d64c2', text: '#ffffff' },
 };
 
 const $ = go.GraphObject.make;
 
-function mainTemplate(diagram, hooks) {
+function mainTemplate(diagram, editMode, handlers) {
+  window.PIXELRATIO = diagram.computePixelRatio(); // constant needed to determine mouse coordinates on the canvas
+
   // eslint-disable-next-line no-param-reassign
   diagram.nodeTemplate = $(
     go.Node,
     'Auto',
+    { isShadowed: true },
     $(
       go.Shape,
-      'Rectangle',
-      new go.Binding('fill', 'nodeType', (nodeType) => nodeTypeColor[nodeType])
+      'RoundedRectangle',
+      { strokeWidth: 0.5 },
+      new go.Binding('fill', 'nodeType', (nodeType) => nodeTypeColor[nodeType].fill)
     ),
     $(
       go.Panel,
       'Table',
-      $(go.RowColumnDefinition, { column: 0, alignment: go.Spot.Left }),
-      $(go.RowColumnDefinition, { column: 2, alignment: go.Spot.Right }),
+      $(go.RowColumnDefinition, { isRow: false, column: 1, maximum: 350 }),
       $(
-        go.TextBlock,
+        go.Panel,
+        'Vertical',
         {
-          margin: new go.Margin(2, 10, 1, 10),
-          stroke: 'black',
-          font: '10pt Segoe UI, sans-serif',
+          stretch: go.GraphObject.Horizontal,
+          alignment: go.Spot.Left,
+          row: 0,
+          column: 1,
+          margin: 5,
         },
-        new go.Binding('text')
+        $(
+          go.TextBlock,
+          {
+            alignment: go.Spot.Left,
+            font: '11pt Calibri, sans-serif',
+            textAlign: 'left',
+            isUnderline: true,
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('text', 'nodeType', (nodeType) => `${NodeTypeLabelMap[nodeType]}:`)
+        ),
+        $(
+          go.TextBlock,
+          {
+            font: '11pt Calibri, sans-serif',
+            textAlign: 'left',
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('text', 'name')
+        ),
+        $(
+          go.TextBlock,
+          {
+            alignment: go.Spot.Left,
+            font: 'bold 11pt Calibri, sans-serif',
+            textAlign: 'left',
+            margin: new go.Margin(2, 0, 0, 0),
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('text', 'label'),
+          new go.Binding('visible', 'label', (label) => !!label)
+        ),
+        $(
+          go.TextBlock,
+          {
+            alignment: go.Spot.Left,
+            font: '11pt Calibri, sans-serif',
+            textAlign: 'left',
+            text: 'Сценарий:',
+            isUnderline: true,
+            margin: new go.Margin(5, 0, 0, 0),
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('visible', 'scenario', (scenario) => !!scenario)
+        ),
+        $(
+          go.TextBlock,
+          {
+            font: '11pt Calibri, sans-serif',
+            textAlign: 'left',
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('text', 'scenario', (scenario) => scenario.name),
+          new go.Binding('visible', 'scenario', (scenario) => !!scenario)
+        ),
+        $(
+          go.TextBlock,
+          {
+            alignment: go.Spot.Left,
+            font: 'bold 11pt Calibri, sans-serif',
+            textAlign: 'left',
+          },
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
+          new go.Binding('text', 'scenarioLabel')
+        )
+      ),
+      $(
+        go.Panel,
+        'Horizontal',
+        { column: 0, row: 2, visible: editMode },
+        $(go.Shape, 'Triangle', {
+          width: 6,
+          height: 6,
+          toSpot: go.Spot.Bottom,
+          portId: 'to',
+          toLinkable: true,
+          angle: 90,
+        })
+      ),
+      $(
+        go.Panel,
+        'Horizontal',
+        { column: 2, row: 2, visible: editMode },
+        $(go.Shape, 'Triangle', {
+          width: 6,
+          height: 6,
+          fromSpot: go.Spot.Top,
+          portId: 'from',
+          fromLinkable: true,
+          angle: 90,
+        })
       )
-    ),
-    $('TreeExpanderButton', {
-      'alignment': go.Spot.Right,
-      'alignmentFocus': go.Spot.Left,
-      'ButtonBorder.figure': 'Rectangle',
-    })
+    )
   );
 
-  diagram.addDiagramListener('ObjectSingleClicked', (event) => {
-    hooks.onClickScenarioHandler(event.subject.part.data);
-  });
+  if (!editMode) {
+    diagram.addDiagramListener('ObjectSingleClicked', (event) => {
+      handlers.onClickScenarioHandler(event.subject.part.data);
+    });
+  } else {
+    diagram.addDiagramListener('LinkDrawn', (event) => {
+      const { fromNode, toNode } = event.subject;
+      const fromNodeId = fromNode.data.id;
+      const toNodeId = toNode.data.id;
+
+      if (handlers.createLinkHandler) {
+        handlers.createLinkHandler(fromNodeId, toNodeId, event.subject);
+      }
+    });
+
+    diagram.addDiagramListener('SelectionDeleted', (event) => {
+      event.subject.each((part) => {
+        if (part instanceof go.Node && handlers.removeNodeHandler) {
+          handlers.removeNodeHandler(part.data.id);
+        }
+
+        if (part instanceof go.Link && handlers.removeLinkHandler) {
+          handlers.removeLinkHandler(part.fromNode.data.id, part.toNode.data.id);
+        }
+      });
+    });
+
+    // Drag and drop new node.
+    const { div } = diagram;
+    // const dragged = {}; // todo нужна ли?
+
+    div.addEventListener(
+      'dragenter',
+      (event) => {
+        event.preventDefault();
+      },
+      false
+    );
+
+    div.addEventListener(
+      'dragover',
+      (event) => {
+        event.preventDefault();
+      },
+      false
+    );
+    div.addEventListener(
+      'drop',
+      (event) => {
+        // prevent default action
+        // (open as link for some elements in some browsers)
+        event.preventDefault();
+
+        // Dragging onto a Diagram
+        const can = event.target;
+        const pixelratio = window.PIXELRATIO;
+
+        // if the target is not the canvas, we may have trouble, so just quit:
+        if (!(can instanceof HTMLCanvasElement)) return;
+
+        const bbox = can.getBoundingClientRect();
+        let bbw = bbox.width;
+        if (bbw === 0) bbw = 0.001;
+        let bbh = bbox.height;
+        if (bbh === 0) bbh = 0.001;
+
+        const draggedOffsetX = parseInt(event.dataTransfer.getData('offsetX'), 10);
+        const draggedOffsetY = parseInt(event.dataTransfer.getData('offsetY'), 10);
+
+        const mx = event.clientX - bbox.left * (can.width / pixelratio / bbw) - draggedOffsetX;
+        const my = event.clientY - bbox.top * (can.height / pixelratio / bbh) - draggedOffsetY;
+        const point = diagram.transformViewToDoc(new go.Point(mx, my));
+        log('New point', point);
+
+        diagram.startTransaction('new node');
+        const dictionaryNodeId = parseInt(event.dataTransfer.getData('id'), 10);
+        handlers.createNodeHandler(dictionaryNodeId);
+        diagram.commitTransaction('new node');
+        event.preventDefault();
+      },
+      false
+    );
+  }
 
   return diagram;
 }
@@ -64,143 +235,9 @@ function treeNodeToDiagramNode(node) {
   return {
     ...node,
     key: node.id,
-    text: node.label() + (node.scenario ? `\n${node.scenarioLabel()}` : ''),
+    label: node.label(),
+    scenarioLabel: node.scenario ? node.scenarioLabel() : '',
   };
-}
-
-function editTreeTemplate(diagram, handlers = {}) {
-  window.PIXELRATIO = diagram.computePixelRatio(); // constant needed to determine mouse coordinates on the canvas
-
-  // eslint-disable-next-line no-param-reassign
-  diagram.nodeTemplate = $(
-    go.Node,
-    'Auto',
-    $(
-      go.Shape,
-      'Rectangle',
-      new go.Binding('fill', 'nodeType', (nodeType) => nodeTypeColor[nodeType])
-    ),
-    $(
-      go.Panel,
-      'Table',
-      $(go.RowColumnDefinition, { column: 0, alignment: go.Spot.Left }),
-      $(go.RowColumnDefinition, { column: 2, alignment: go.Spot.Right }),
-      $(
-        go.TextBlock,
-        {
-          margin: new go.Margin(2, 10, 1, 10),
-          stroke: 'black',
-          font: '10pt Segoe UI, sans-serif',
-        },
-        new go.Binding('text')
-      ),
-      $(
-        go.Panel,
-        'Horizontal',
-        { column: 0, row: 1 },
-        $(go.Shape, { width: 6, height: 6, toSpot: go.Spot.Left, portId: 'to', toLinkable: true }),
-        $(go.TextBlock, 'to')
-      ),
-      $(
-        go.Panel,
-        'Horizontal',
-        { column: 2, row: 1, rowSpan: 2 },
-        $(go.TextBlock, 'from'),
-        $(go.Shape, {
-          width: 6,
-          height: 6,
-          fromSpot: go.Spot.Right,
-          portId: 'from',
-          fromLinkable: true,
-        })
-      )
-    ),
-    $('TreeExpanderButton', {
-      'alignment': go.Spot.Right,
-      'alignmentFocus': go.Spot.Left,
-      'ButtonBorder.figure': 'Rectangle',
-    })
-  );
-
-  diagram.addDiagramListener('LinkDrawn', (event) => {
-    const { fromNode, toNode } = event.subject;
-    const fromNodeId = fromNode.data.id;
-    const toNodeId = toNode.data.id;
-
-    if (handlers.createLinkHandler) {
-      handlers.createLinkHandler(fromNodeId, toNodeId, event.subject);
-    }
-  });
-
-  diagram.addDiagramListener('SelectionDeleted', (event) => {
-    event.subject.each((part) => {
-      if (part instanceof go.Node && handlers.removeNodeHandler) {
-        handlers.removeNodeHandler(part.data.id);
-      }
-
-      if (part instanceof go.Link && handlers.removeLinkHandler) {
-        handlers.removeLinkHandler(part.fromNode.data.id, part.toNode.data.id);
-      }
-    });
-  });
-
-  // Drag and drop new node.
-  const { div } = diagram;
-  // const dragged = {}; // todo нужна ли?
-
-  div.addEventListener(
-    'dragenter',
-    (event) => {
-      event.preventDefault();
-    },
-    false
-  );
-
-  div.addEventListener(
-    'dragover',
-    (event) => {
-      event.preventDefault();
-    },
-    false
-  );
-  div.addEventListener(
-    'drop',
-    (event) => {
-      // prevent default action
-      // (open as link for some elements in some browsers)
-      event.preventDefault();
-
-      // Dragging onto a Diagram
-      const can = event.target;
-      const pixelratio = window.PIXELRATIO;
-
-      // if the target is not the canvas, we may have trouble, so just quit:
-      if (!(can instanceof HTMLCanvasElement)) return;
-
-      const bbox = can.getBoundingClientRect();
-      let bbw = bbox.width;
-      if (bbw === 0) bbw = 0.001;
-      let bbh = bbox.height;
-      if (bbh === 0) bbh = 0.001;
-
-      const draggedOffsetX = parseInt(event.dataTransfer.getData('offsetX'), 10);
-      const draggedOffsetY = parseInt(event.dataTransfer.getData('offsetY'), 10);
-
-      const mx = event.clientX - bbox.left * (can.width / pixelratio / bbw) - draggedOffsetX;
-      const my = event.clientY - bbox.top * (can.height / pixelratio / bbh) - draggedOffsetY;
-      const point = diagram.transformViewToDoc(new go.Point(mx, my));
-      log('New point', point);
-
-      diagram.startTransaction('new node');
-      const dictionaryNodeId = parseInt(event.dataTransfer.getData('id'), 10);
-      handlers.createNodeHandler(dictionaryNodeId);
-      diagram.commitTransaction('new node');
-      event.preventDefault();
-    },
-    false
-  );
-
-  return diagram;
 }
 
 // Conver faultTreeNode to TreeNode
@@ -372,32 +409,30 @@ export class TreeController {
       'initialAutoScale': go.Diagram.Uniform,
       'layout': $(go.LayeredDigraphLayout, {
         direction: 0,
+        linkSpacing: 15,
+        layerSpacing: 150,
+        columnSpacing: 10,
+        packOption: go.LayeredDigraphLayout.PackExpand,
+        layeringOption: go.LayeredDigraphLayout.LayerLongestPathSink,
       }),
       'undoManager.isEnabled': true,
     }));
 
     // Select template.
-    if (editMode) {
-      editTreeTemplate(diagram, {
-        createLinkHandler: this.createLinkHandler.bind(this),
-        removeNodeHandler: this.removeNodeHandler.bind(this),
-        removeLinkHandler: this.removeLinkHandler.bind(this),
-        createNodeHandler: this.createNodeHandler.bind(this),
-      });
-    } else {
-      mainTemplate(diagram, {
-        onClickScenarioHandler: this.onClickScenarioHandler.bind(this),
-      });
-    }
+    mainTemplate(diagram, editMode, {
+      onClickScenarioHandler: this.onClickScenarioHandler.bind(this),
+      createLinkHandler: this.createLinkHandler.bind(this),
+      removeNodeHandler: this.removeNodeHandler.bind(this),
+      removeLinkHandler: this.removeLinkHandler.bind(this),
+      createNodeHandler: this.createNodeHandler.bind(this),
+    });
 
     diagram.linkTemplate = $(
       go.Link,
       {
         routing: go.Link.AvoidsNodes,
-        corner: 2,
-        toShortLength: 4,
       },
-      $(go.Shape, { strokeWidth: 1.5, stroke: '#197682' })
+      $(go.Shape, { strokeWidth: 1, stroke: '#b2b2b2' })
     );
   }
 
