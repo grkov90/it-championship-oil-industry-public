@@ -3,6 +3,7 @@ import { Col, Row, Button } from 'antd';
 import { AsideMenu } from 'components/AsideMenu';
 import { faultTreeNodeDictionaryService } from 'services/FaultTreeNodeDictionary.service';
 import { ItemInfo } from './ItemInfo';
+import styles from './ItemInfo.module.css';
 
 export const FaultTreeNodeDictionaryPage = () => {
   const [items, setItems] = useState([]);
@@ -30,13 +31,21 @@ export const FaultTreeNodeDictionaryPage = () => {
     <Row gutter={8}>
       <Col span={4}>
         <AsideMenu
+          Row={({ item, index }) => (
+            <Row onClick={() => setCurrentNode(item)} key={index}>
+              <Col span={24}>
+                <Button block className={styles.Button}>
+                  <p>{item.name}</p>
+                </Button>
+              </Col>
+            </Row>
+          )}
           Header={
             <Button block type="primary" ghost onClick={() => setCurrentNode(null)}>
-              Добавить ноду
+              Добавить элемент
             </Button>
           }
           items={items}
-          onSelectItem={setCurrentNode}
         />
       </Col>
       <Col span={20}>

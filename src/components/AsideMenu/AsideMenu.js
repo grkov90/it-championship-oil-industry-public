@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './AsideMenu.module.css';
 import { AsideMenuList } from '../AsideMenuList';
 
-export const AsideMenu = ({ Header, items, onSelectItem }) => {
+export const AsideMenu = ({ Header, items, Row }) => {
   return (
     <div className={styles.AsideMenu}>
       {Header !== undefined && (
@@ -13,7 +13,7 @@ export const AsideMenu = ({ Header, items, onSelectItem }) => {
           <Divider className={styles.Divider} />
         </>
       )}
-      <AsideMenuList items={items} onSelectItem={onSelectItem} />
+      <AsideMenuList Row={Row} items={items} />
     </div>
   );
 };
@@ -21,5 +21,5 @@ export const AsideMenu = ({ Header, items, onSelectItem }) => {
 AsideMenu.propTypes = {
   Header: PropTypes.element,
   items: PropTypes.arrayOf(PropTypes.object),
-  onSelectItem: PropTypes.func,
+  Row: PropTypes.func,
 };

@@ -1,20 +1,39 @@
+/* eslint-disable */
 import React from 'react';
-import { Button, Collapse } from 'antd';
+import { Button, Collapse, Input } from 'antd';
 import PropTypes from 'prop-types';
+import { PlusOutlined } from '@ant-design/icons';
 import styles from './ScenariosAsideMenu.module.css';
 
-export const ScenariosAsideMenu = ({ items }) => {
+export const ScenariosAsideMenu = ({
+  items,
+  onScenarioAdd,
+  onScenarioSelect,
+  newScenarioName,
+  setNewScenarioName,
+}) => {
   const { Panel } = Collapse;
   return (
     <Collapse className={styles.ScenariosAsideMenu}>
-      {items.map(({ title, scenarios }) => (
-        <Panel header={title} key={title}>
-          <Button type="primary" ghost className={styles.ScenarioButton} block>
-            Добавить сценарий
-          </Button>
-          {scenarios.map(({ title }) => (
-            <Button className={styles.ScenarioButton} block key={title}>
-              {title}
+      {items.map((tree) => (
+        <Panel header={tree.name} key={tree.name}>
+           <Input
+             className={styles.Input}
+            value={newScenarioName}
+            onChange={(e) => setNewScenarioName(e.target.value)}
+            placeholder="Добавить сценарий"
+            suffix={
+              <Button type="primary" icon={<PlusOutlined />} onClick={() => onScenarioAdd(tree.id)} />
+            }
+           />
+          {tree.scenarios.map((scenario) => (
+            <Button
+              onClick={() => onScenarioSelect(scenario)}
+              className={styles.ScenarioButton}
+              block
+              key={scenario.name}
+            >
+              {scenario.name}
             </Button>
           ))}
         </Panel>
@@ -26,12 +45,16 @@ export const ScenariosAsideMenu = ({ items }) => {
 ScenariosAsideMenu.propTypes = {
   items: PropTypes.arrayOf(
     PropTypes.shape({
-      title: PropTypes.string,
+      name: PropTypes.string,
       scenarios: PropTypes.arrayOf(
         PropTypes.shape({
-          title: PropTypes.string,
+          name: PropTypes.string,
         })
       ),
     })
   ),
+  onScenarioAdd: PropTypes.func,
+  onScenarioSelect: PropTypes.func,
+  setNewScenarioName: PropTypes.func,
+  newScenarioName: PropTypes.string,
 };

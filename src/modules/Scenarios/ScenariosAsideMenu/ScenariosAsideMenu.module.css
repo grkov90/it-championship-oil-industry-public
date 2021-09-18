@@ -1,5 +1,4 @@
 .ScenariosAsideMenu {
-    min-width: 300px;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 140px);
@@ -8,8 +7,14 @@
     overflow-x:hidden;
 }
 
+.Input {
+    margin-bottom: 4px;
+}
+
 .ScenarioButton {
-    margin-bottom: 3px;
+    margin-bottom: 4px;
+    height: auto;
+    white-space: normal;
 }
 .ScenarioButton:nth-last-of-type(1) {
     margin-bottom: 0;

@@ -1,27 +1,31 @@
 import { makeId } from 'utils/helpers/random';
+import { BehaviorSubject } from 'rxjs';
 import { localService } from './local.service';
 
 export const generateCrud = (serviceKey) => {
-  let state;
+  const state = new BehaviorSubject([]);
 
   const updateState = () => {
-    state = localService.getItem(serviceKey) || [];
+    state.next(localService.getItem(serviceKey) || []);
   };
 
   updateState();
 
   const getAll = () => {
-    return state;
+    return state.value;
   };
 
   const create = (item) => {
-    const newValue = [{ ...item, id: makeId() }, ...state];
+    const newItem = { ...item, id: makeId() };
+    const newValue = [newItem, ...state.value];
     localService.setItem(serviceKey, newValue);
     updateState();
+
+    return newItem;
   };
 
   const update = (item) => {
-    const newValue = state.map((el) => {
+    const newValue = state.value.map((el) => {
       if (el.id === item.id) {
         return {
           ...el,
@@ -35,13 +39,13 @@ export const generateCrud = (serviceKey) => {
   };
 
   const remove = (id) => {
-    const newValue = state.filter((el) => el.id !== id);
+    const newValue = state.value.filter((el) => el.id !== id);
     localService.setItem(serviceKey, newValue);
     updateState();
   };
 
   const getById = (id) => {
-    return state.find((el) => el.id === id);
+    return state.value.find((el) => el.id === id);
   };
 
   return {

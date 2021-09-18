@@ -4,14 +4,6 @@ import { faultScenarioElementService } from 'services/FaultScenarioElement.servi
 import { faultTreeNodeService } from 'services/FaultTreeNode.service';
 import { NodeType, Tree } from './nodes';
 import * as go from './go-debug-hack';
-import { dictionary, scenarios, scenarioNodes, trees } from './data';
-
-if (!localStorage.getItem('faultTreeNode')) {
-  localStorage.setItem('faultTreeNode', JSON.stringify(trees)); // todo
-  localStorage.setItem('faultTreeNodeDictionary', JSON.stringify(dictionary)); // todo
-  localStorage.setItem('faultScenarioElement', JSON.stringify(scenarioNodes)); // todo
-  localStorage.setItem('faultScenario', JSON.stringify(scenarios)); // todo
-}
 
 function log(...args) {
   // eslint-disable-next-line no-console
@@ -29,7 +21,7 @@ const nodeTypeColor = {
 
 const $ = go.GraphObject.make;
 
-function mainTemplate(diagram) {
+function mainTemplate(diagram, hooks) {
   // eslint-disable-next-line no-param-reassign
   diagram.nodeTemplate = $(
     go.Node,
@@ -61,7 +53,19 @@ function mainTemplate(diagram) {
     })
   );
 
+  diagram.addDiagramListener('ObjectSingleClicked', (event) => {
+    hooks.onClickScenarioHandler(event.subject.part.data);
+  });
+
   return diagram;
+}
+
+function treeNodeToDiagramNode(node) {
+  return {
+    ...node,
+    key: node.id,
+    text: node.label() + (node.scenario ? `\n${node.scenarioLabel()}` : ''),
+  };
 }
 
 function editTreeTemplate(diagram, handlers = {}) {
@@ -142,7 +146,7 @@ function editTreeTemplate(diagram, handlers = {}) {
 
   // Drag and drop new node.
   const { div } = diagram;
-  const dragged = {}; // todo нужна ли?
+  // const dragged = {}; // todo нужна ли?
 
   div.addEventListener(
     'dragenter',
@@ -178,32 +182,25 @@ function editTreeTemplate(diagram, handlers = {}) {
       if (bbw === 0) bbw = 0.001;
       let bbh = bbox.height;
       if (bbh === 0) bbh = 0.001;
-      const mx = event.clientX - bbox.left * (can.width / pixelratio / bbw) - dragged.offsetX;
-      const my = event.clientY - bbox.top * (can.height / pixelratio / bbh) - dragged.offsetY;
-      const point = diagram.transformViewToDoc(new go.Point(mx, my));
-      diagram.startTransaction('new node');
-      diagram.model.addNodeData({
-        location: point,
-        text: event.dataTransfer.getData('id'), // todo this type is string. Should be number
-        color: 'lightyellow',
-      });
-      diagram.commitTransaction('new node');
 
-      // If we were using drag data, we could get it here, ie:
-      // var data = event.dataTransfer.getData('text');
+      const draggedOffsetX = parseInt(event.dataTransfer.getData('offsetX'), 10);
+      const draggedOffsetY = parseInt(event.dataTransfer.getData('offsetY'), 10);
+
+      const mx = event.clientX - bbox.left * (can.width / pixelratio / bbw) - draggedOffsetX;
+      const my = event.clientY - bbox.top * (can.height / pixelratio / bbh) - draggedOffsetY;
+      const point = diagram.transformViewToDoc(new go.Point(mx, my));
+      log('New point', point);
+
+      diagram.startTransaction('new node');
+      const dictionaryNodeId = parseInt(event.dataTransfer.getData('id'), 10);
+      handlers.createNodeHandler(dictionaryNodeId);
+      diagram.commitTransaction('new node');
+      event.preventDefault();
     },
     false
   );
 
   return diagram;
-}
-
-function treeNodeToDiagramNode(node) {
-  return {
-    ...node,
-    key: node.id,
-    text: node.label() + (node.scenario ? `\n${node.scenarioLabel()}` : ''),
-  };
 }
 
 // Conver faultTreeNode to TreeNode
@@ -238,9 +235,13 @@ function convertFaultTreeNodeToTreeNode(faultTreeNode) {
 }
 
 export class TreeController {
-  constructor(divId) {
+  // onClickScenarioNode(treeNode) {}
+  // onDeleteNode(faultTreeNodeId) {}
+  constructor({ divId, onClickScenarioNode, onDeleteNode }) {
     this.treeId = null; // Tree id.
     this.divId = divId;
+    this.onClickScenarioNode = onClickScenarioNode;
+    this.onDeleteNode = onDeleteNode;
   }
 
   renderTree(treeId, scenarioId, editMode) {
@@ -248,7 +249,7 @@ export class TreeController {
     this.scenarioId = scenarioId;
 
     this.updateTree();
-    this.renderDiagram(!editMode); // todo
+    this.renderDiagram(editMode);
     this.updateDiagramModel();
   }
 
@@ -291,24 +292,24 @@ export class TreeController {
   removeLinkHandler(fromId, toId) {
     const child = faultTreeNodeService.getById(fromId);
     if (!child) return;
-    child.parents = child.parents || [];
-    child.parents = child.parents.filter((id) => id !== toId);
-    faultTreeNodeService.update(child);
+    faultTreeNodeService.update({
+      ...child,
+      parents: child.parents.filter((id) => id !== toId),
+    });
     log('Remove link', { fromId, toId });
     this.refreshDiagram();
   }
 
   // Create node
   createNodeHandler(id) {
-    const node = faultTreeNodeDictionaryService.getById(id);
     const treeNode = faultTreeNodeService.create({
       faultTreeId: this.treeId,
       faultTreeNodeDictonaryId: id,
       parents: [],
     });
-    // eslint-disable-next-line no-console
-    console.log(node, treeNode);
-    // todo
+
+    this.refreshDiagram();
+    return treeNode;
   }
 
   // Remove node
@@ -333,6 +334,28 @@ export class TreeController {
     updatedNodes.forEach((node) => {
       faultTreeNodeService.update(node);
     });
+
+    this.refreshDiagram();
+
+    if (this.onDeleteNode) {
+      this.onDeleteNode(id);
+    }
+  }
+
+  onClickScenarioHandler(treeNode) {
+    switch (treeNode.nodeType) {
+      case NodeType.ItResource:
+      case NodeType.BusinessFunction:
+      case NodeType.NegativeEvent: {
+        if (this.onClickScenarioNode) {
+          this.onClickScenarioNode(treeNode);
+        }
+        return false;
+      }
+      default: {
+        return false;
+      }
+    }
   }
 
   renderDiagram(editMode) {
@@ -359,9 +382,12 @@ export class TreeController {
         createLinkHandler: this.createLinkHandler.bind(this),
         removeNodeHandler: this.removeNodeHandler.bind(this),
         removeLinkHandler: this.removeLinkHandler.bind(this),
+        createNodeHandler: this.createNodeHandler.bind(this),
       });
     } else {
-      mainTemplate(diagram);
+      mainTemplate(diagram, {
+        onClickScenarioHandler: this.onClickScenarioHandler.bind(this),
+      });
     }
 
     diagram.linkTemplate = $(
@@ -377,7 +403,9 @@ export class TreeController {
 
   refreshDiagram() {
     this.updateTree();
-    this.diagram.model.mergeNodeDataArray(this.tree.nodes.map(treeNodeToDiagramNode));
+    this.diagram.model.commit((m) => {
+      m.mergeNodeDataArray(this.tree.nodes.map(treeNodeToDiagramNode));
+    });
   }
 
   updateDiagramModel() {

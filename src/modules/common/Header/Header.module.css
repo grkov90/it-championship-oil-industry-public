@@ -1,14 +1,6 @@
 .Header {
-    display: flex;
-    justify-content: space-around;
     padding: 20px;
     background: #e0f1ff;
-    min-width: 1000px;
     margin-bottom: 20px;
 
-}
-
-.button {
-    min-width: 200px;
-    border: 1px solid #00baff;
 }

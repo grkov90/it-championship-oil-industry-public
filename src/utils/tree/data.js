@@ -820,6 +820,7 @@ export const scenarios = [
   {
     id: 1,
     name: 'Частичный отказ\nОтказ системы резервного копирования',
+    faultTreeId: 1,
   },
 ];
 
@@ -831,3 +832,14 @@ export const scenarioNodes = [
     rtoTarget: 40,
   },
 ];
+
+export function resetData() {
+  if (!localStorage.getItem('faultTree')) {
+    localStorage.setItem('faultTree', JSON.stringify(trees));
+    localStorage.setItem('faultTreeNode', JSON.stringify(tree1));
+    localStorage.setItem('faultTreeNodeDictionary', JSON.stringify(dictionary));
+    localStorage.setItem('faultScenarioElement', JSON.stringify(scenarioNodes));
+    localStorage.setItem('faultScenario', JSON.stringify(scenarios));
+    window.location.reload();
+  }
+}

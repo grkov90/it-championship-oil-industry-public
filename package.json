@@ -1,8 +1,9 @@
 {
-  "name": "tree-builder",
+  "name": "it-championship-oil-industry",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@ant-design/icons": "^4.6.4",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "y^11.1.0",
     "@testing-library/user-event": "^12.1.10",
@@ -15,6 +16,7 @@
     "react-hook-form": "^7.15.3",
     "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
+    "rxjs": "^7.3.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },

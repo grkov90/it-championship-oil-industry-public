@@ -7,6 +7,17 @@ export const NodeType = {
   Money: 'Money',
 };
 
+export const NodeTypeLabelMap = {
+  [NodeType.ItResource]: 'Ит ресурс',
+  [NodeType.ItService]: 'Ит сервис',
+  [NodeType.BusinessFunction]: 'Бизнес функция',
+  [NodeType.BusinessProcess]: 'Бизнес процесс',
+  [NodeType.NegativeEvent]: 'Негативное событие',
+  [NodeType.Money]: 'Деньги',
+};
+
+export const NodeTypeOptions = Object.entries(NodeTypeLabelMap);
+
 function assert(...args) {
   // eslint-disable-next-line no-console
   console.assert(...args);
@@ -63,10 +74,11 @@ export class ItResourceNode extends Node {
       'Can be only ItResource nodes'
     );
 
-    this.scenario.rtoTargetChildSum = children.reduce(
-      (acc, child) => acc + child.scenario.rtoTarget + child.scenario.rtoTargetChildSum,
-      0
-    );
+    this.scenario.rtoTargetChildSum = children.length
+      ? Math.max(
+          ...children.map((child) => child.scenario.rtoTarget + child.scenario.rtoTargetChildSum)
+        )
+      : 0;
   }
 
   label() {
@@ -76,6 +88,7 @@ export class ItResourceNode extends Node {
 
   scenarioLabel() {
     return `Сценарий: ${this.scenario.name}
+    Max RTO нижнего уровня: ${this.scenario.rtoTargetChildSum}
     RTO: ${this.scenario.rtoTarget}`;
   }
 
@@ -295,7 +308,6 @@ export class Tree {
     this.leafs = []; // Node[]
     this.treeObj = null; // { [Node.id]: { Node: {+.children} }
 
-    assert(nodes.length, 'В дереве должен быть хотя бы один элемент');
     this.nodes = nodes.map((node) => createNodeByType(node));
 
     this.makeTree();
@@ -307,6 +319,9 @@ export class Tree {
     nodes.forEach((scenarioNode) => {
       const faultTreeNode = this.treeObj[scenarioNode.faultTreeNodeId];
       assert(faultTreeNode, 'Не найдена нода для ноды сценария', scenarioNode);
+      if (!faultTreeNode) {
+        return;
+      }
 
       faultTreeNode.setScenario({ id, name, ...scenarioNode });
     });
