@@ -173,7 +173,6 @@ function mainTemplate(diagram, editMode, handlers) {
 
     // Drag and drop new node.
     const { div } = diagram;
-    // const dragged = {}; // todo нужна ли?
 
     div.addEventListener(
       'dragenter',
@@ -295,7 +294,6 @@ export class TreeController {
     const nodes = faultTreeNodeService.getByFaultTreeId(this.treeId);
     const faultTreeNodes = nodes.map((node) => convertFaultTreeNodeToTreeNode(node));
     const tree = (this.tree = new Tree(faultTreeNodes));
-    window.tree = tree; // todo
 
     if (scenarioId) {
       const scenario = faultScenarioService.getById(scenarioId);
