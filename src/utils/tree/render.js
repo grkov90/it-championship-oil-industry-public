@@ -406,6 +406,7 @@ export class TreeController {
     this.diagram = null;
 
     const diagram = (this.diagram = $(go.Diagram, divId, {
+      'allowDelete': editMode,
       'initialAutoScale': go.Diagram.Uniform,
       'layout': $(go.LayeredDigraphLayout, {
         direction: 0,
