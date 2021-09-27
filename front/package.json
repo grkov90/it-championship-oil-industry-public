@@ -1,6 +1,6 @@
 {
-  "name": "tree-builder",
-  "version": "0.1.0",
+  "name": "it-championship-oil-industry-public-client",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^4.6.4",
