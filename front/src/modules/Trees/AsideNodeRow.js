@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import { Button, Col, Row } from 'antd';
 import styles from '../FaultTreeNodeDictionary/ItemInfo.module.css';
 
+/**
+ * Перетаскиваемый элемент сценария
+ */
 export const AsideNodeRow = ({ item, index, fetchNodes }) => {
   return (
     <Row key={index}>

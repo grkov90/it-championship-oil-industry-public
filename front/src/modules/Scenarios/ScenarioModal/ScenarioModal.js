@@ -8,6 +8,9 @@ import { TypeFormFields } from '../../../components/TypeFormFields';
 import { faultTreeNodeService } from '../../../services/FaultTreeNode.service';
 import { faultTreeNodeDictionaryService } from '../../../services/FaultTreeNodeDictionary.service';
 
+/**
+ * Модальное окно редактирования сценария
+ */
 export const ScenarioModal = ({
   isVisible,
   diagramNode,

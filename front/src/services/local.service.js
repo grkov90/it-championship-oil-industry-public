@@ -1,6 +1,10 @@
 import { saveTemplateAsFile } from '../utils/download/download';
 import initData from './data.json';
 
+/**
+ * Сервис для работы с localStorage
+ */
+
 const setItem = (key, value) => {
   window.localStorage.setItem(key, JSON.stringify(value));
 };

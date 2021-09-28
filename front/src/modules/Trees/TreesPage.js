@@ -11,12 +11,18 @@ import styles from './Trees.module.css';
 import { AsideTreeRow } from './AsideTreeRow';
 import { AsideNodeRow } from './AsideNodeRow';
 
+/**
+ * Сгенерировать новое имя дерева.
+ */
 const getNewNameWithVersion = (oldName) => {
   const splitName = oldName.split('v. ');
   const version = splitName.length === 2 ? +splitName[1] + 1 : 2;
   return `${splitName[0]} v. ${version}`;
 };
 
+/**
+ * Страница редактирования деревьев отказа
+ */
 export const TreesPage = () => {
   const activeTree = useRef(null);
   const [newTreeName, setNewTreeName] = useState('');

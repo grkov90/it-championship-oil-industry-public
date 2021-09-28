@@ -3,6 +3,9 @@ import { ScenariosPage } from 'modules/Scenarios';
 import { TreesPage } from 'modules/Trees';
 import { FaultTreeNodeDictionaryPage } from 'modules/FaultTreeNodeDictionary';
 
+/**
+ * Навигация в приложении
+ */
 export const AppRouter = () => {
   return (
     <Switch>

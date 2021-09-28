@@ -2,6 +2,9 @@ import { makeId } from 'utils/helpers/random';
 import { BehaviorSubject } from 'rxjs';
 import { localService } from './local.service';
 
+/**
+ * Создание CRUD операций для сервиса.
+ */
 export const generateCrud = (serviceKey, idKey) => {
   const state = new BehaviorSubject([]);
 

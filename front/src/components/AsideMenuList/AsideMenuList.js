@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './AsideMenuList.module.css';
 
+/**
+ * Боковое меню
+ */
 export const AsideMenuList = ({ items, Row }) => {
   return (
     <div className={styles.AsideMenuList}>

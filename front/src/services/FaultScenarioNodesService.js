@@ -1,5 +1,9 @@
 import { generateCrud } from './utils';
 
+/**
+ * Сервис элементов сценариев отказа
+ */
+
 const serviceKey = 'faultScenarioNodes';
 
 const crud = generateCrud(serviceKey, 'faultScenarioNodeId');

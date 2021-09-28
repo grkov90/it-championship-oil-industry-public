@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { PlusOutlined } from '@ant-design/icons';
 import styles from './ScenariosAsideMenu.module.css';
 
+/**
+ * Боковое меню выбора сценария
+ */
 export const ScenariosAsideMenu = ({
   items,
   onScenarioAdd,

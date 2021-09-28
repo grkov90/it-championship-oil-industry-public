@@ -7,6 +7,10 @@ import { FaultTree } from './fault-tree/fault-tree';
 import { makeScenarioNode } from './fault-scenario/scenario-nodes';
 import { faultScenarioService } from '../../services/FaultScenario.service';
 
+/**
+ * Создание и отображение дерева отказов.
+ */
+
 function log(...args) {
   // eslint-disable-next-line no-console
   console.log(...args);

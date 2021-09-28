@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import { Button, Col, Popover, Row } from 'antd';
 import styles from '../FaultTreeNodeDictionary/ItemInfo.module.css';
 
+/**
+ * Список сценариев отказа
+ */
 export const AsideTreeRow = ({ item, index, handleSelectTree, onCopyTree }) => {
   return (
     <Row onClick={() => handleSelectTree(item)} key={index}>

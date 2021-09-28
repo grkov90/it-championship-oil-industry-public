@@ -2,6 +2,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useEffect, useState } from 'react';
 import { TreeController } from '../tree/render';
 
+/**
+ * Создание дерева отказов в DOM дереве
+ */
 export const useRenderTree = ({
   treeId,
   scenarioId,

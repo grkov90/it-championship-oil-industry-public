@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import styles from './AsideMenu.module.css';
 import { AsideMenuList } from '../AsideMenuList';
 
+/**
+ * Элемент бокового меню
+ */
 export const AsideMenu = ({ Header, items, Row }) => {
   return (
     <div className={styles.AsideMenu}>
