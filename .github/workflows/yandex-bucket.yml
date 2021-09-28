@@ -5,6 +5,9 @@ on:
         branches:
             - main
 
+defaults:
+  run:
+    working-directory: front
 jobs:
     deploy:
         runs-on: ubuntu-latest        
@@ -12,16 +15,17 @@ jobs:
             - uses: actions/checkout@v2
             - uses: actions/setup-node@v1
               with:
-                  node-version: 14.x
-                  cache: 'yarn'
+                  node-version: '14'
+                  cache: 'yarn'              
             # Build
-            - run: cd front && yarn --frozen-lockfile
-            - run: cd front && yarn build
+            - run: yarn --frozen-lockfile
+            - run: yarn build
             # Deploy
-            - uses: nekitcorp/yandex-storage-website-action@v1
+            - uses: nekitcorp/yandex-storage-website-action@v1                            
               with:
                   accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
                   secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
                   bucket: ${{ secrets.BUCKET }}
-                  path: "./front/build"
+                  path: "build"
                   clear: true
+
