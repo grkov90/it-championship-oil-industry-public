@@ -109,7 +109,7 @@ export class BusinessFunctionScenarioNode {
     }
 
     this.calculated.RPOWaitTime =
-      (children.length ? children.reduce((acc, child) => acc + child.calculated.RPOMax, 0) : 0) -
+      (children.length ? Math.max(...children.map((child) => child.calculated.RPOMax)) : 0) -
       this.scenario.RPO;
 
     // Позитив должен обнуляться, негатив - идти на верх
@@ -145,7 +145,7 @@ export class BusinessProcessScenarioNode {
       : 0;
 
     this.calculated.RPOWaitTimeMax = children.length
-      ? children.reduce((acc, child) => acc + child.calculated.RPOWaitTime, 0)
+      ? Math.max(...children.map((child) => child.calculated.RPOWaitTime))
       : 0;
   }
 
@@ -155,7 +155,7 @@ export class BusinessProcessScenarioNode {
 
   scenarioLabel() {
     return `RTO Максимальное время простоя: ${this.calculated.RTOWaitTimeMax} ч.
-    RPO суммарно потеря данных за: ${this.calculated.RPOWaitTimeMax} ч.`;
+    RPO потеря данных за: ${this.calculated.RPOWaitTimeMax} ч.`;
   }
 }
 
