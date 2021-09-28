@@ -4,14 +4,19 @@ import { Input, Card, Col, Row, Button, Select } from 'antd';
 import PropTypes from 'prop-types';
 import { usePrev } from 'utils/hooks/usePrev';
 import { TypeFormFields } from 'components/TypeFormFields';
-import { NodeTypeOptions } from 'utils/tree/nodes';
 import styles from './ItemInfo.module.css';
+import { NodeTypeLabelMap } from '../../utils/tree/node-types';
 
+/**
+ * Набор полей для элементов словаря
+ */
 export const ItemInfo = ({ node, onSubmit }) => {
   const methods = useForm({ defaultValues: node });
   const prevNode = usePrev(node);
+  const NodeTypeOptions = Object.entries(NodeTypeLabelMap);
+
   useEffect(() => {
-    if (prevNode?.id !== node?.id) {
+    if (prevNode?.faultTreeNodeDictionaryId !== node?.faultTreeNodeDictionaryId) {
       if (node === null) {
         methods.reset({});
       } else {
@@ -63,7 +68,7 @@ export const ItemInfo = ({ node, onSubmit }) => {
 ItemInfo.propTypes = {
   node: PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
+    faultTreeNodeDictionaryId: PropTypes.number,
     type: PropTypes.string,
     rtoTarget: PropTypes.string,
     calculateDamageMoneyString: PropTypes.string,

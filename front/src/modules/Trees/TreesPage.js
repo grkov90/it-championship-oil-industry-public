@@ -31,19 +31,22 @@ export const TreesPage = () => {
 
   const handleCopyTree = (oldTree) => {
     const newTree = faultTreeService.create({ name: getNewNameWithVersion(oldTree.name) });
-    const oldTreeNodes = faultTreeNodeService.getByFaultTreeId(oldTree.id);
+    const oldTreeNodes = faultTreeNodeService.getByFaultTreeId(oldTree.faultTreeId);
 
     const idMap = {};
 
     oldTreeNodes.forEach((oldTreeNode) => {
-      const newNode = faultTreeNodeService.create({ ...oldTreeNode, faultTreeId: newTree.id });
-      idMap[oldTreeNode.id] = newNode.id;
+      const newNode = faultTreeNodeService.create({
+        ...oldTreeNode,
+        faultTreeId: newTree.faultTreeId,
+      });
+      idMap[oldTreeNode.faultTreeNodeId] = newNode.faultTreeNodeId;
     });
-    const newTreeNodes = faultTreeNodeService.getByFaultTreeId(newTree.id);
+    const newTreeNodes = faultTreeNodeService.getByFaultTreeId(newTree.faultTreeId);
     newTreeNodes.forEach((newTreeNode) => {
       faultTreeNodeService.update({
         ...newTreeNode,
-        parents: newTreeNode.parents.map((parent) => idMap[parent]),
+        parentsIds: newTreeNode.parentsIds.map((parent) => idMap[parent]),
       });
     });
 
@@ -52,11 +55,13 @@ export const TreesPage = () => {
 
   const fetchNodes = () => {
     const faultTreeNodesIds = faultTreeNodeService
-      .getByFaultTreeId(activeTree.current?.id)
-      .map((el) => el.faultTreeNodeDictonaryId);
+      .getByFaultTreeId(activeTree.current?.faultTreeId)
+      .map((el) => el.faultTreeNodeDictionaryId);
     const faultTreeNodeDictionary = faultTreeNodeDictionaryService.getAll();
     setFaultTreeNodeDictionary(
-      faultTreeNodeDictionary.filter((el) => !faultTreeNodesIds.includes(el.id))
+      faultTreeNodeDictionary.filter(
+        (el) => !faultTreeNodesIds.includes(el.faultTreeNodeDictionaryId)
+      )
     );
   };
 
@@ -76,7 +81,7 @@ export const TreesPage = () => {
   };
 
   const { divId } = useRenderTree({
-    treeId: activeTree.current?.id,
+    treeId: activeTree.current?.faultTreeId,
     scenarioId: undefined,
     editMode: true,
     onDeleteNode: fetchNodes,

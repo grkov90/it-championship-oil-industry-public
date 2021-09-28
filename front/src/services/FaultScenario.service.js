@@ -1,8 +1,8 @@
 import { generateCrud } from './utils';
 
-const serviceKey = 'faultScenario';
+const serviceKey = 'faultScenarios';
 
-const crud = generateCrud(serviceKey);
+const crud = generateCrud(serviceKey, 'faultScenarioId');
 
 export const faultScenarioService = {
   ...crud,

@@ -1,9 +1,11 @@
 import { faultTreeNodeDictionaryService } from 'services/FaultTreeNodeDictionary.service';
-import { faultScenarioService } from 'services/FaultScenario.service';
-import { faultScenarioElementService } from 'services/FaultScenarioElement.service';
+import { faultScenarioNodesService } from 'services/FaultScenarioNodesService';
 import { faultTreeNodeService } from 'services/FaultTreeNode.service';
-import { NodeType, Tree, NodeTypeLabelMap } from './nodes';
 import * as go from './diagram-lib';
+import { NodeType, NodeTypeLabelMap } from './node-types';
+import { FaultTree } from './fault-tree/fault-tree';
+import { makeScenarioNode } from './fault-scenario/scenario-nodes';
+import { faultScenarioService } from '../../services/FaultScenario.service';
 
 function log(...args) {
   // eslint-disable-next-line no-console
@@ -76,10 +78,10 @@ function mainTemplate(diagram, editMode, handlers) {
             font: 'bold 11pt Calibri, sans-serif',
             textAlign: 'left',
             margin: new go.Margin(2, 0, 0, 0),
+            visible: !editMode,
           },
           new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
-          new go.Binding('text', 'label'),
-          new go.Binding('visible', 'label', (label) => !!label)
+          new go.Binding('text', 'label')
         ),
         $(
           go.TextBlock,
@@ -90,19 +92,19 @@ function mainTemplate(diagram, editMode, handlers) {
             text: 'Сценарий:',
             isUnderline: true,
             margin: new go.Margin(5, 0, 0, 0),
+            visible: !editMode,
           },
-          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
-          new go.Binding('visible', 'scenario', (scenario) => !!scenario)
+          new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text)
         ),
         $(
           go.TextBlock,
           {
             font: '11pt Calibri, sans-serif',
             textAlign: 'left',
+            visible: !editMode,
           },
           new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
-          new go.Binding('text', 'scenario', (scenario) => scenario.name),
-          new go.Binding('visible', 'scenario', (scenario) => !!scenario)
+          new go.Binding('text', 'scenario')
         ),
         $(
           go.TextBlock,
@@ -110,6 +112,7 @@ function mainTemplate(diagram, editMode, handlers) {
             alignment: go.Spot.Left,
             font: 'bold 11pt Calibri, sans-serif',
             textAlign: 'left',
+            visible: !editMode,
           },
           new go.Binding('stroke', 'nodeType', (nodeType) => nodeTypeColor[nodeType].text),
           new go.Binding('text', 'scenarioLabel')
@@ -151,8 +154,8 @@ function mainTemplate(diagram, editMode, handlers) {
   } else {
     diagram.addDiagramListener('LinkDrawn', (event) => {
       const { fromNode, toNode } = event.subject;
-      const fromNodeId = fromNode.data.id;
-      const toNodeId = toNode.data.id;
+      const fromNodeId = fromNode.data.faultTreeNodeId;
+      const toNodeId = toNode.data.faultTreeNodeId;
 
       if (handlers.createLinkHandler) {
         handlers.createLinkHandler(fromNodeId, toNodeId, event.subject);
@@ -162,11 +165,14 @@ function mainTemplate(diagram, editMode, handlers) {
     diagram.addDiagramListener('SelectionDeleted', (event) => {
       event.subject.each((part) => {
         if (part instanceof go.Node && handlers.removeNodeHandler) {
-          handlers.removeNodeHandler(part.data.id);
+          handlers.removeNodeHandler(part.data.faultTreeNodeId);
         }
 
         if (part instanceof go.Link && handlers.removeLinkHandler) {
-          handlers.removeLinkHandler(part.fromNode.data.id, part.toNode.data.id);
+          handlers.removeLinkHandler(
+            part.fromNode.data.faultTreeNodeId,
+            part.toNode.data.faultTreeNodeId
+          );
         }
       });
     });
@@ -218,7 +224,10 @@ function mainTemplate(diagram, editMode, handlers) {
         log('New point', point);
 
         diagram.startTransaction('new node');
-        const dictionaryNodeId = parseInt(event.dataTransfer.getData('id'), 10);
+        const dictionaryNodeId = parseInt(
+          event.dataTransfer.getData('faultTreeNodeDictionaryId'),
+          10
+        );
         handlers.createNodeHandler(dictionaryNodeId);
         diagram.commitTransaction('new node');
         event.preventDefault();
@@ -230,49 +239,62 @@ function mainTemplate(diagram, editMode, handlers) {
   return diagram;
 }
 
-function treeNodeToDiagramNode(node) {
-  return {
-    ...node,
-    key: node.id,
-    label: node.label(),
-    scenarioLabel: node.scenario ? node.scenarioLabel() : '',
-  };
-}
+function calculateScenario(scenarioId, faultTree) {
+  const scenarioNodesFields = faultScenarioNodesService.getByScenarioId(scenarioId) || [];
+  const scenarioNodesFieldsMapByFaultTreeNodeId = scenarioNodesFields.reduce((acc, node) => {
+    acc[node.faultTreeNodeId] = node;
+    return acc;
+  }, {});
 
-// Conver faultTreeNode to TreeNode
-function convertFaultTreeNodeToTreeNode(faultTreeNode) {
-  const dictNode = faultTreeNodeDictionaryService.getById(faultTreeNode.faultTreeNodeDictonaryId);
+  const scenarioNodesMapByFaultTreeNodeId = faultTree.nodes.reduce((acc, faultTreeNode) => {
+    const dictionaryNodeFields = faultTreeNodeDictionaryService.getById(
+      faultTreeNode.fields.faultTreeNodeDictionaryId
+    );
+    const scenarioNodeFields =
+      scenarioNodesFieldsMapByFaultTreeNodeId[faultTreeNode.faultTreeNodeId];
 
-  const common = {
-    ...faultTreeNode,
-    name: dictNode.name,
-    nodeType: dictNode.nodeType,
-  };
+    acc[faultTreeNode.faultTreeNodeId] = makeScenarioNode(
+      dictionaryNodeFields.nodeType,
+      dictionaryNodeFields.target,
+      scenarioNodeFields?.scenario
+    );
 
-  switch (dictNode.nodeType) {
-    case NodeType.BusinessFunction:
-    case NodeType.ItResource: {
-      return {
-        ...common,
-        rtoTarget: dictNode.rtoTarget,
-      };
-    }
+    return acc;
+  }, {});
 
-    case NodeType.NegativeEvent: {
-      return {
-        ...common,
-        calculateDamageMoneyText: dictNode.calculateDamageMoneyText,
-      };
-    }
+  faultTree.breadthFirstDownToUp((faultTreeNodeId, faultTreeNodeChildrenIds) => {
+    scenarioNodesMapByFaultTreeNodeId[faultTreeNodeId].calculate(
+      faultTreeNodeChildrenIds.map((id) => scenarioNodesMapByFaultTreeNodeId[id])
+    );
+  });
 
-    default:
-      return common;
-  }
+  const itResources = faultTree.nodes
+    .filter(
+      (node) =>
+        faultTreeNodeDictionaryService.getById(node.fields.faultTreeNodeDictionaryId).nodeType ===
+        NodeType.ItResource
+    )
+    .map((faultTreeNode) => scenarioNodesMapByFaultTreeNodeId[faultTreeNode.faultTreeNodeId]);
+
+  faultTree.nodes
+    .filter(
+      (node) =>
+        faultTreeNodeDictionaryService.getById(node.fields.faultTreeNodeDictionaryId).nodeType ===
+        NodeType.Money
+    )
+    .map((faultTreeNode) => scenarioNodesMapByFaultTreeNodeId[faultTreeNode.faultTreeNodeId])
+    .forEach((moneyNode) => moneyNode.calculateCostRepair(itResources));
+
+  return scenarioNodesMapByFaultTreeNodeId;
 }
 
 export class TreeController {
-  // onClickScenarioNode(treeNode) {}
-  // onDeleteNode(faultTreeNodeId) {}
+  /**
+   *
+   * @param divId
+   * @param onClickScenarioNode(treeNode) {}
+   * @param onDeleteNode(faultTreeNodeId) {}
+   */
   constructor({ divId, onClickScenarioNode, onDeleteNode }) {
     this.treeId = null; // Tree id.
     this.divId = divId;
@@ -292,32 +314,50 @@ export class TreeController {
   updateTree() {
     const { scenarioId } = this;
     const nodes = faultTreeNodeService.getByFaultTreeId(this.treeId);
-    const faultTreeNodes = nodes.map((node) => convertFaultTreeNodeToTreeNode(node));
-    const tree = (this.tree = new Tree(faultTreeNodes));
+    this.faultTree = new FaultTree(nodes);
+    this.scenarioNodesMapByFaultTreeNodeId = null;
 
     if (scenarioId) {
-      const scenario = faultScenarioService.getById(scenarioId);
-      const scenarioNodes = faultScenarioElementService.getByScenarioId(scenarioId);
-      tree.setScenario({
-        ...scenario,
-        nodes: scenarioNodes,
-      });
-      this.tree.calculateScenario();
+      this.scenarioNodesMapByFaultTreeNodeId = calculateScenario(scenarioId, this.faultTree);
     }
+  }
+
+  faultTreeNodeToLibNode(faultTreeNode) {
+    let scenarioLabel = '';
+    let label = '';
+    let scenario = '';
+    const dictionaryNode = faultTreeNodeDictionaryService.getById(
+      faultTreeNode.fields.faultTreeNodeDictionaryId
+    );
+
+    if (this.scenarioId) {
+      const scenarioNode = this.scenarioNodesMapByFaultTreeNodeId[faultTreeNode.faultTreeNodeId];
+      label = scenarioNode.label();
+      scenarioLabel = scenarioNode.scenarioLabel();
+      scenario = faultScenarioService.getById(this.scenarioId).name;
+    }
+    return {
+      faultTreeNodeId: faultTreeNode.faultTreeNodeId,
+      name: dictionaryNode.name,
+      nodeType: dictionaryNode.nodeType,
+      scenario,
+      label,
+      scenarioLabel,
+    };
   }
 
   // Create link
   createLinkHandler(fromId, toId, link) {
     const child = faultTreeNodeService.getById(fromId);
-    child.parents = child.parents || [];
+    child.parentsIds = child.parentsIds || [];
 
-    if (child.parents.find((id) => id === toId)) {
+    if (child.parentsIds.find((id) => id === toId)) {
       this.diagram.remove(link);
       log('Skip create link', { fromId, toId });
       return;
     }
 
-    child.parents.push(toId);
+    child.parentsIds.push(toId);
     faultTreeNodeService.update(child);
     log('Create link', { fromId, toId });
     this.refreshDiagram();
@@ -329,7 +369,7 @@ export class TreeController {
     if (!child) return;
     faultTreeNodeService.update({
       ...child,
-      parents: child.parents.filter((id) => id !== toId),
+      parentsIds: child.parentsIds.filter((id) => id !== toId),
     });
     log('Remove link', { fromId, toId });
     this.refreshDiagram();
@@ -339,7 +379,7 @@ export class TreeController {
   createNodeHandler(id) {
     const treeNode = faultTreeNodeService.create({
       faultTreeId: this.treeId,
-      faultTreeNodeDictonaryId: id,
+      faultTreeNodeDictionaryId: id,
       parents: [],
     });
 
@@ -354,14 +394,14 @@ export class TreeController {
     const nodes = faultTreeNodeService.getAll();
     const updatedNodes = [];
     nodes.forEach((node) => {
-      let parents = node.parents || [];
-      const len = parents.length;
-      parents = parents.filter((parentId) => parentId !== id);
+      let parentsIds = node.parentsIds || [];
+      const len = parentsIds.length;
+      parentsIds = parentsIds.filter((parentId) => parentId !== id);
 
-      if (node.parents !== len) {
+      if (node.parentsIds !== len) {
         updatedNodes.push({
           ...node,
-          parents,
+          parentsIds,
         });
       }
     });
@@ -438,29 +478,26 @@ export class TreeController {
   refreshDiagram() {
     this.updateTree();
     this.diagram.model.commit((m) => {
-      m.mergeNodeDataArray(this.tree.nodes.map(treeNodeToDiagramNode));
+      m.mergeNodeDataArray(this.faultTree.nodes.map(this.faultTreeNodeToLibNode.bind(this)));
     });
   }
 
   updateDiagramModel() {
-    const faultTree = this.tree.nodes;
+    const { nodes } = this.faultTree;
 
-    this.diagram.model = new go.GraphLinksModel(
-      faultTree.map(treeNodeToDiagramNode),
-      faultTree.reduce(
-        (arr, node) => [
-          ...arr,
-          ...node.parents.reduce((items, parentId) => {
-            if (!parentId) {
-              return items;
-            }
-            items.push({ to: parentId, from: node.id });
+    const nodesForTree = nodes.map(this.faultTreeNodeToLibNode.bind(this));
+    const links = nodes.reduce((arr, node) => {
+      node.parentsIds.forEach((parentId) => {
+        arr.push({ to: parentId, from: node.faultTreeNodeId });
+      });
+      return arr;
+    }, []);
 
-            return items;
-          }, []),
-        ],
-        []
-      )
-    );
+    const model = new go.GraphLinksModel();
+    model.nodeKeyProperty = 'faultTreeNodeId';
+    model.addNodeDataCollection(nodesForTree);
+    model.addLinkDataCollection(links);
+
+    this.diagram.model = model;
   }
 }

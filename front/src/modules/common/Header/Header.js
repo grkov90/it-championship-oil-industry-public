@@ -4,6 +4,9 @@ import { localService } from 'services/local.service';
 import styles from './Header.module.css';
 import { ImportButton } from './components/ImportButton';
 
+/**
+ * Навигация в header страницы
+ */
 export const Header = () => {
   const { pathname } = useLocation();
   return (

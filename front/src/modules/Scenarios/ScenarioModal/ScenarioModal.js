@@ -1,56 +1,84 @@
 import PropTypes from 'prop-types';
 import { Button, Col, Modal, Row, Typography } from 'antd';
 import { useForm, FormProvider } from 'react-hook-form';
-import { faultScenarioElementService } from 'services/FaultScenarioElement.service';
+import { faultScenarioNodesService } from 'services/FaultScenarioNodesService';
 import { useEffect } from 'react';
 import styles from './ScenarioModal.module.css';
 import { TypeFormFields } from '../../../components/TypeFormFields';
+import { faultTreeNodeService } from '../../../services/FaultTreeNode.service';
+import { faultTreeNodeDictionaryService } from '../../../services/FaultTreeNodeDictionary.service';
 
-export const ScenarioModal = ({ isVisible, node, setIsVisible, treeController }) => {
+export const ScenarioModal = ({
+  isVisible,
+  diagramNode,
+  scenarioId,
+  setIsVisible,
+  treeController,
+}) => {
   const methods = useForm({});
   useEffect(() => {
     const fetchDefaultValue = () => {
-      const faultScenarioElement = faultScenarioElementService.getByFaultTreeNodeId(
-        node.id,
-        node.scenario.id
+      const faultTreeNode = faultTreeNodeService.getById(diagramNode.faultTreeNodeId);
+      const dictionaryNode = faultTreeNodeDictionaryService.getById(
+        faultTreeNode.faultTreeNodeDictionaryId
       );
-      if (!faultScenarioElement) {
+      const faultScenarioNode = faultScenarioNodesService.getByFaultTreeNodeId(
+        faultTreeNode.faultTreeNodeId,
+        scenarioId
+      );
+      if (!faultScenarioNode) {
         methods.reset({
-          calculateDamageMoneyString: node.target.calculateDamageMoneyString,
-          rtoTarget: node.target.rtoTarget,
-          nodeType: node.nodeType,
+          target: {
+            calculateDamageMoneyString: dictionaryNode.target.calculateDamageMoneyString,
+            RTO: dictionaryNode.target.RTO,
+            RPO: dictionaryNode.target.RPO,
+            costRepair: dictionaryNode.target.costRepair,
+          },
+          nodeType: diagramNode.nodeType,
         });
       } else {
         methods.reset({
-          calculateDamageMoneyString: faultScenarioElement.calculateDamageMoneyString,
-          rtoTarget: faultScenarioElement.rtoTarget,
-          nodeType: node.nodeType,
+          target: {
+            calculateDamageMoneyString: faultScenarioNode.scenario.calculateDamageMoneyString,
+            RTO: faultScenarioNode.scenario.RTO,
+            RPO: faultScenarioNode.scenario.RPO,
+            costRepair: faultScenarioNode.scenario.costRepair,
+          },
+          nodeType: diagramNode.nodeType,
         });
       }
     };
-    if (node) {
+    if (diagramNode) {
       fetchDefaultValue();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [node]);
+  }, [diagramNode]);
 
   const handleSave = (values) => {
-    const faultScenarioElement = faultScenarioElementService.getByFaultTreeNodeId(
-      node.id,
-      node.scenario.id
+    const faultScenarioNode = faultScenarioNodesService.getByFaultTreeNodeId(
+      diagramNode.faultTreeNodeId,
+      scenarioId
     );
-    if (faultScenarioElement) {
-      faultScenarioElementService.update({
-        ...faultScenarioElement,
-        rtoTarget: values.rtoTarget,
-        calculateDamageMoneyString: values.calculateDamageMoneyString,
+    if (faultScenarioNode) {
+      faultScenarioNodesService.update({
+        ...faultScenarioNode,
+        scenario: {
+          RTO: values.target.RTO,
+          RPO: values.target.RPO,
+          calculateDamageMoneyString: values.target.calculateDamageMoneyString,
+          costRepair: values.target.costRepair,
+        },
       });
     } else {
-      faultScenarioElementService.create({
-        scenarioId: node.scenario.id,
-        faultTreeNodeId: node.id,
-        rtoTarget: values.rtoTarget,
-        calculateDamageMoneyString: values.calculateDamageMoneyString || undefined,
+      faultScenarioNodesService.create({
+        faultScenarioId: scenarioId,
+        faultTreeNodeId: diagramNode.faultTreeNodeId,
+        scenario: {
+          RTO: values.target.RTO,
+          RPO: values.target.RPO,
+          calculateDamageMoneyString: values.target.calculateDamageMoneyString || undefined,
+          costRepair: values.target.costRepair,
+        },
       });
     }
     setIsVisible(false);
@@ -62,7 +90,7 @@ export const ScenarioModal = ({ isVisible, node, setIsVisible, treeController })
       <Modal onCancel={() => setIsVisible(false)} footer={null} visible={isVisible}>
         <Row gutter={[4, 8]}>
           <Col span={24}>
-            <Typography className={styles.header}>{node?.name}</Typography>
+            <Typography className={styles.header}>{diagramNode?.name}</Typography>
           </Col>
           <TypeFormFields span={24} />
           <Col span={12} offset={6}>
@@ -78,19 +106,16 @@ export const ScenarioModal = ({ isVisible, node, setIsVisible, treeController })
 
 ScenarioModal.propTypes = {
   isVisible: PropTypes.bool,
-  node: PropTypes.shape({
-    id: PropTypes.number,
+  diagramNode: PropTypes.shape({
+    faultTreeNodeId: PropTypes.number,
     target: PropTypes.shape({
       calculateDamageMoneyString: PropTypes.string,
       rtoTarget: PropTypes.number,
     }),
     nodeType: PropTypes.string,
-
-    scenario: PropTypes.shape({
-      id: PropTypes.number,
-    }),
     name: PropTypes.string,
   }),
+  scenarioId: PropTypes.number,
   setIsVisible: PropTypes.func,
   treeController: PropTypes.shape({
     refreshDiagram: PropTypes.func,

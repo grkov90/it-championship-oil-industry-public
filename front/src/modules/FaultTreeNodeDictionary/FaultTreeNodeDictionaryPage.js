@@ -5,6 +5,9 @@ import { faultTreeNodeDictionaryService } from 'services/FaultTreeNodeDictionary
 import { ItemInfo } from './ItemInfo';
 import styles from './ItemInfo.module.css';
 
+/**
+ * Страница справочника элементов дерева отказов.
+ */
 export const FaultTreeNodeDictionaryPage = () => {
   const [items, setItems] = useState([]);
 

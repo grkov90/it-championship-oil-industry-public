@@ -2,7 +2,7 @@ import { makeId } from 'utils/helpers/random';
 import { BehaviorSubject } from 'rxjs';
 import { localService } from './local.service';
 
-export const generateCrud = (serviceKey) => {
+export const generateCrud = (serviceKey, idKey) => {
   const state = new BehaviorSubject([]);
 
   const updateState = () => {
@@ -16,7 +16,7 @@ export const generateCrud = (serviceKey) => {
   };
 
   const create = (item) => {
-    const newItem = { ...item, id: makeId() };
+    const newItem = { ...item, [idKey]: makeId() };
     const newValue = [newItem, ...state.value];
     localService.setItem(serviceKey, newValue);
     updateState();
@@ -26,7 +26,7 @@ export const generateCrud = (serviceKey) => {
 
   const update = (item) => {
     const newValue = state.value.map((el) => {
-      if (el.id === item.id) {
+      if (el[idKey] === item[idKey]) {
         return {
           ...el,
           ...item,
@@ -39,13 +39,13 @@ export const generateCrud = (serviceKey) => {
   };
 
   const remove = (id) => {
-    const newValue = state.value.filter((el) => el.id !== id);
+    const newValue = state.value.filter((el) => el[idKey] !== id);
     localService.setItem(serviceKey, newValue);
     updateState();
   };
 
   const getById = (id) => {
-    return state.value.find((el) => el.id === id);
+    return state.value.find((el) => el[idKey] === id);
   };
 
   return {

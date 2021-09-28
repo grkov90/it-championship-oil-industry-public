@@ -31,7 +31,7 @@ export const ScenariosAsideMenu = ({
                 <Button
                   type="primary"
                   icon={<PlusOutlined />}
-                  onClick={() => onScenarioAdd(tree.id)}
+                  onClick={() => onScenarioAdd(tree.faultTreeId)}
                 />
               }
             />

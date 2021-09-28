@@ -1,5 +1,8 @@
 import { Button, Upload } from 'antd';
 
+/**
+ * Кнопка импорта данных
+ */
 export const ImportButton = () => {
   const handleBeforeUpload = (file) => {
     const fr = new FileReader();

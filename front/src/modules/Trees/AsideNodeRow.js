@@ -9,7 +9,7 @@ export const AsideNodeRow = ({ item, index, fetchNodes }) => {
         <Button
           onDragEnd={fetchNodes}
           onDragStart={(e) => {
-            e.dataTransfer.setData('id', item.id);
+            e.dataTransfer.setData('faultTreeNodeDictionaryId', item.faultTreeNodeDictionaryId);
             e.dataTransfer.setData('offsetX', e.nativeEvent.offsetX - e.target.clientWidth / 2);
             e.dataTransfer.setData('offsetY', e.nativeEvent.offsetY - e.target.clientHeight / 2);
           }}
@@ -27,7 +27,7 @@ export const AsideNodeRow = ({ item, index, fetchNodes }) => {
 AsideNodeRow.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string,
-    id: PropTypes.number,
+    faultTreeNodeDictionaryId: PropTypes.number,
   }),
   index: PropTypes.number,
   fetchNodes: PropTypes.func,
