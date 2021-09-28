@@ -15,14 +15,13 @@ jobs:
                   node-version: 14.x
                   cache: 'yarn'
             # Build
-            - run: cd front
-            - run: yarn --frozen-lockfile
-            - run: yarn build
+            - run: cd front && yarn --frozen-lockfile
+            - run: cd front && yarn build
             # Deploy
             - uses: nekitcorp/yandex-storage-website-action@v1
               with:
                   accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
                   secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
                   bucket: ${{ secrets.BUCKET }}
-                  path: "./build"
+                  path: "./front/build"
                   clear: true
