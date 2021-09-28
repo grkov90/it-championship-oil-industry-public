@@ -39,10 +39,12 @@ export const ScenarioModal = ({
       } else {
         methods.reset({
           target: {
-            calculateDamageMoneyString: faultScenarioNode.scenario.calculateDamageMoneyString,
+            calculateDamageMoneyString:
+              faultScenarioNode.scenario.calculateDamageMoneyString ||
+              dictionaryNode.target.calculateDamageMoneyString,
             RTO: faultScenarioNode.scenario.RTO,
             RPO: faultScenarioNode.scenario.RPO,
-            costRepair: faultScenarioNode.scenario.costRepair,
+            costRepair: faultScenarioNode.scenario.costRepair || dictionaryNode.target.costRepair,
           },
           nodeType: diagramNode.nodeType,
         });
@@ -65,7 +67,7 @@ export const ScenarioModal = ({
         scenario: {
           RTO: values.target.RTO,
           RPO: values.target.RPO,
-          calculateDamageMoneyString: values.target.calculateDamageMoneyString,
+          calculateDamageMoneyString: values.target.calculateDamageMoneyString || undefined,
           costRepair: values.target.costRepair,
         },
       });
@@ -90,6 +92,7 @@ export const ScenarioModal = ({
       <Modal onCancel={() => setIsVisible(false)} footer={null} visible={isVisible}>
         <Row gutter={[4, 8]}>
           <Col span={24}>
+            <Typography>Сценарий для:</Typography>
             <Typography className={styles.header}>{diagramNode?.name}</Typography>
           </Col>
           <TypeFormFields span={24} />
