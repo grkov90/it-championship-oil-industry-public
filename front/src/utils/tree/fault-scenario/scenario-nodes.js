@@ -20,7 +20,7 @@ export class ItResourceScenarioNode {
     };
     this.calculated = {
       RTOChildSum: 0,
-      RPOChildSum: 0,
+      RPOChildMax: 0,
     };
   }
 
@@ -29,8 +29,10 @@ export class ItResourceScenarioNode {
       ? Math.max(...children.map((child) => child.scenario.RTO + child.calculated.RTOChildSum))
       : 0;
 
-    this.calculated.RPOChildSum = children.length
-      ? Math.max(...children.map((child) => child.scenario.RPO + child.calculated.RPOChildSum))
+    this.calculated.RPOChildMax = children.length
+      ? Math.max(
+          ...children.map((child) => Math.max(child.scenario.RPO, child.calculated.RPOChildMax))
+        )
       : 0;
   }
 
@@ -43,8 +45,8 @@ export class ItResourceScenarioNode {
   scenarioLabel() {
     return `Max RTO нижнего уровня: ${this.calculated.RTOChildSum} ч.
     RTO: ${this.scenario.RTO} ч.
-    Max RPO нижнего уровня: ${this.calculated.RPOChildSum} ч.
     RPO: ${this.scenario.RPO} ч.
+    Max RPO нижнего уровня: ${this.calculated.RPOChildMax} ч.    
     Стоимость восстановления: ${currencyFormatter.format(this.scenario.costRepair)}`;
   }
 }
@@ -63,7 +65,9 @@ export class ItServiceScenarioNode {
       : 0;
 
     this.calculated.RPOMax = children.length
-      ? Math.max(...children.map((child) => child.scenario.RPO + child.calculated.RPOChildSum))
+      ? Math.max(
+          ...children.map((child) => Math.max(child.scenario.RPO, child.calculated.RPOChildMax))
+        )
       : 0;
   }
 
@@ -215,10 +219,12 @@ export class MoneyScenarioNode {
   }
 
   calculateCostRepair(itResourcesNodes) {
-    this.calculated.costRepairSum = itResourcesNodes.reduce(
-      (acc, itResourceNode) => acc + itResourceNode.scenario.costRepair,
-      0
-    );
+    this.calculated.costRepairSum = itResourcesNodes.reduce((acc, itResourceNode) => {
+      if (itResourceNode.scenario.RTO > 0) {
+        return acc + itResourceNode.scenario.costRepair;
+      }
+      return acc;
+    }, 0);
   }
 
   scenarioLabel() {

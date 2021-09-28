@@ -1,4 +1,5 @@
 import { Button, Upload } from 'antd';
+import { reloadData } from '../../../../../services/local.service';
 
 /**
  * Кнопка импорта данных
@@ -8,10 +9,7 @@ export const ImportButton = () => {
     const fr = new FileReader();
     fr.addEventListener('load', () => {
       const data = JSON.parse(fr.result);
-      Object.keys(data).forEach((key) => {
-        localStorage.setItem(key, data[key]);
-      });
-      window.location.reload();
+      reloadData(true, data);
     });
 
     fr.readAsText(file);

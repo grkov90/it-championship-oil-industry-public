@@ -1,0 +1,1346 @@
+{
+  "dataVersion": "2021-09-28T13:43:47.487Z",
+  "faultTrees": [
+    {
+      "faultTreeId": 1,
+      "name": "Текущая конфигурация"
+    }
+  ],
+  "faultTreeNodes": [
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 3555143,
+      "parentsIds": [
+        10004
+      ],
+      "faultTreeNodeId": 6883580
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 200,
+      "faultTreeNodeId": 9200,
+      "parentsIds": []
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1,
+      "faultTreeNodeId": 9001,
+      "parentsIds": [
+        9200
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 2,
+      "faultTreeNodeId": 9002,
+      "parentsIds": [
+        9200
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 3,
+      "faultTreeNodeId": 9003,
+      "parentsIds": [
+        9200
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 10,
+      "faultTreeNodeId": 9010,
+      "parentsIds": [
+        9001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 11,
+      "faultTreeNodeId": 9011,
+      "parentsIds": [
+        9001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 12,
+      "faultTreeNodeId": 9012,
+      "parentsIds": [
+        9001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 13,
+      "faultTreeNodeId": 9013,
+      "parentsIds": [
+        9002,
+        9003
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 14,
+      "faultTreeNodeId": 9014,
+      "parentsIds": [
+        9001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 100,
+      "faultTreeNodeId": 9100,
+      "parentsIds": [
+        9010
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 101,
+      "faultTreeNodeId": 9101,
+      "parentsIds": [
+        9010
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 102,
+      "faultTreeNodeId": 9102,
+      "parentsIds": [
+        9010
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 103,
+      "faultTreeNodeId": 9103,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 104,
+      "faultTreeNodeId": 9104,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 105,
+      "faultTreeNodeId": 9105,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 106,
+      "faultTreeNodeId": 9106,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 107,
+      "faultTreeNodeId": 9107,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 108,
+      "faultTreeNodeId": 9108,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 109,
+      "faultTreeNodeId": 9109,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 110,
+      "faultTreeNodeId": 9110,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 111,
+      "faultTreeNodeId": 9111,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 112,
+      "faultTreeNodeId": 9112,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 113,
+      "faultTreeNodeId": 9113,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 114,
+      "faultTreeNodeId": 9114,
+      "parentsIds": [
+        9011
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 115,
+      "faultTreeNodeId": 9115,
+      "parentsIds": [
+        9012
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 116,
+      "faultTreeNodeId": 9116,
+      "parentsIds": [
+        9012
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 117,
+      "faultTreeNodeId": 9117,
+      "parentsIds": [
+        9012
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 118,
+      "faultTreeNodeId": 9118,
+      "parentsIds": [
+        9012
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 119,
+      "faultTreeNodeId": 9119,
+      "parentsIds": [
+        9012
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 120,
+      "faultTreeNodeId": 9120,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 121,
+      "faultTreeNodeId": 9121,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 122,
+      "faultTreeNodeId": 9122,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 123,
+      "faultTreeNodeId": 9123,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 124,
+      "faultTreeNodeId": 9124,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 125,
+      "faultTreeNodeId": 9125,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 126,
+      "faultTreeNodeId": 9126,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 127,
+      "faultTreeNodeId": 9127,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 128,
+      "faultTreeNodeId": 9128,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 129,
+      "faultTreeNodeId": 9129,
+      "parentsIds": [
+        9013
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1001,
+      "faultTreeNodeId": 10001,
+      "parentsIds": [
+        9100,
+        9101,
+        9102,
+        9110,
+        9111,
+        9120,
+        9125,
+        9126,
+        9127
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1002,
+      "faultTreeNodeId": 10002,
+      "parentsIds": [
+        9103,
+        9105
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1003,
+      "faultTreeNodeId": 10003,
+      "parentsIds": [
+        9104,
+        9124,
+        9128,
+        9129
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1004,
+      "faultTreeNodeId": 10004,
+      "parentsIds": [
+        9106,
+        9107,
+        9108,
+        9109,
+        9112,
+        9113,
+        9114,
+        9121,
+        9122,
+        9125
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1005,
+      "faultTreeNodeId": 10005,
+      "parentsIds": [
+        9115,
+        9116,
+        9117,
+        9118,
+        9119,
+        9121,
+        9123,
+        9125
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1006,
+      "faultTreeNodeId": 10006,
+      "parentsIds": [
+        9120,
+        9125,
+        9126
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1101,
+      "faultTreeNodeId": 10101,
+      "parentsIds": [
+        10002
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1102,
+      "faultTreeNodeId": 10102,
+      "parentsIds": [
+        10002
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1103,
+      "faultTreeNodeId": 10103,
+      "parentsIds": [
+        10002
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1104,
+      "faultTreeNodeId": 10104,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1105,
+      "faultTreeNodeId": 10105,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1106,
+      "faultTreeNodeId": 10106,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1107,
+      "faultTreeNodeId": 10107,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1121,
+      "faultTreeNodeId": 10121,
+      "parentsIds": [
+        10002
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1122,
+      "faultTreeNodeId": 10122,
+      "parentsIds": [
+        10006
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1108,
+      "faultTreeNodeId": 10108,
+      "parentsIds": [
+        10001,
+        10122
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1109,
+      "faultTreeNodeId": 10109,
+      "parentsIds": [
+        10006
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1110,
+      "faultTreeNodeId": 10110,
+      "parentsIds": [
+        10002,
+        10003,
+        10004,
+        10005
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1112,
+      "faultTreeNodeId": 10112,
+      "parentsIds": [
+        10003,
+        10101,
+        10102,
+        10103,
+        10104,
+        10105,
+        10106
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1113,
+      "faultTreeNodeId": 10113,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1114,
+      "faultTreeNodeId": 10114,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1115,
+      "faultTreeNodeId": 10115,
+      "parentsIds": [
+        10001
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1116,
+      "faultTreeNodeId": 10116,
+      "parentsIds": [
+        10002,
+        10003
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1111,
+      "faultTreeNodeId": 10111,
+      "parentsIds": [
+        10001,
+        10002,
+        10003,
+        10101,
+        10102,
+        10103,
+        10104,
+        10105,
+        10106,
+        10107,
+        10113,
+        10114,
+        10115,
+        10116,
+        10121,
+        6883580
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1117,
+      "faultTreeNodeId": 10117,
+      "parentsIds": [
+        10001,
+        10002,
+        10003,
+        10004,
+        10005
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1118,
+      "faultTreeNodeId": 10118,
+      "parentsIds": [
+        10001,
+        10002,
+        10003,
+        10004,
+        10005,
+        10006
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1119,
+      "faultTreeNodeId": 10119,
+      "parentsIds": [
+        10001,
+        10002,
+        10003,
+        10004,
+        10005,
+        10006
+      ]
+    },
+    {
+      "faultTreeId": 1,
+      "faultTreeNodeDictionaryId": 1120,
+      "faultTreeNodeId": 10120,
+      "parentsIds": [
+        10001,
+        10002,
+        10003,
+        10004
+      ]
+    }
+  ],
+  "faultScenarios": [
+    {
+      "faultScenarioId": 1,
+      "name": "Частичный отказ SQL БД Petrel",
+      "faultTreeId": 1
+    }
+  ],
+  "faultScenarioNodes": [
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 6883580,
+      "scenario": {
+        "RTO": 8
+      },
+      "faultScenarioNodeId": 6226379
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10111,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 6646707
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10112,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 6956070
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10110,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 3225493
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10117,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 7043978
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10119,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 3370819
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10118,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 5262596
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10116,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 4394089
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10121,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 9905564
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10103,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 6444490
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10102,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 5519570
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10101,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 7008338
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10109,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 7629996
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10115,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 1732909
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10114,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 2073570
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10113,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 1109623
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10107,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 3208421
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10106,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 6461698
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10105,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 6650755
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10104,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 2003079
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10122,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 5097157
+    },
+    {
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10108,
+      "scenario": {
+        "RTO": 0
+      },
+      "faultScenarioNodeId": 4640307
+    },
+    {
+      "faultScenarioNodeId": 1,
+      "faultScenarioId": 1,
+      "faultTreeNodeId": 10120,
+      "scenario": {
+        "RTO": 0
+      }
+    }
+  ],
+  "faultTreeNodeDictionary": [
+    {
+      "name": "SQL кластер БД Petrel",
+      "nodeType": "ItResource",
+      "target": {
+        "RTO": 1
+      },
+      "faultTreeNodeDictionaryId": 9612905
+    },
+    {
+      "name": "SQL БД Peterl",
+      "nodeType": "ItResource",
+      "target": {
+        "RTO": 8
+      },
+      "faultTreeNodeDictionaryId": 3555143
+    },
+    {
+      "nodeType": "Money",
+      "name": "Деньги",
+      "faultTreeNodeDictionaryId": 200
+    },
+    {
+      "nodeType": "NegativeEvent",
+      "name": "Падение эффективности проходки",
+      "faultTreeNodeDictionaryId": 1,
+      "target": {
+        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => RTOWaitTimeChildSum * 426e4"
+      }
+    },
+    {
+      "nodeType": "NegativeEvent",
+      "name": "Перебур",
+      "faultTreeNodeDictionaryId": 2,
+      "target": {
+        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) =>  RTOWaitTimeChildSum > 0?375e4:0"
+      }
+    },
+    {
+      "nodeType": "NegativeEvent",
+      "name": "Простой",
+      "faultTreeNodeDictionaryId": 3,
+      "target": {
+        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => 125e5* RTOWaitTimeChildSum"
+      }
+    },
+    {
+      "nodeType": "BusinessProcess",
+      "name": "Запрос информации по новой скважине",
+      "faultTreeNodeDictionaryId": 10
+    },
+    {
+      "nodeType": "BusinessProcess",
+      "name": "Подготовка секторной модели",
+      "faultTreeNodeDictionaryId": 11
+    },
+    {
+      "nodeType": "BusinessProcess",
+      "name": "Подготовка геонавигационного проекта",
+      "faultTreeNodeDictionaryId": 12
+    },
+    {
+      "nodeType": "BusinessProcess",
+      "name": "Сопровождение мониторинга",
+      "faultTreeNodeDictionaryId": 13
+    },
+    {
+      "nodeType": "BusinessProcess",
+      "name": "Завершение мониторинга",
+      "faultTreeNodeDictionaryId": 14
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Плановая траектория",
+      "faultTreeNodeDictionaryId": 100,
+      "target": {
+        "RTO": 72
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Маркшейдерская справка (привязка устья)",
+      "faultTreeNodeDictionaryId": 101,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Целевой пласт",
+      "faultTreeNodeDictionaryId": 102,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Экспорт скважин и скважинных данных БД",
+      "faultTreeNodeDictionaryId": 103,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Экспорт поверхностей",
+      "faultTreeNodeDictionaryId": 104,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Экспорт пластопересечений",
+      "faultTreeNodeDictionaryId": 105,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт скважин и скважинных данных",
+      "faultTreeNodeDictionaryId": 106,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт поверхностей",
+      "faultTreeNodeDictionaryId": 107,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт пластопересечений",
+      "faultTreeNodeDictionaryId": 108,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Составление корреляционных схем по скважинам окружения",
+      "faultTreeNodeDictionaryId": 109,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт плановых целей",
+      "faultTreeNodeDictionaryId": 110,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт плановой траектории",
+      "faultTreeNodeDictionaryId": 111,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Проверка плановой траектории на выполнение геологических целей, геологическим построениям и оптимальности геометрии ствола",
+      "faultTreeNodeDictionaryId": 112,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Настройка отображения планшетов и карт (для формирования отчетности)",
+      "faultTreeNodeDictionaryId": 113,
+      "target": {
+        "RTO": 72
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Экспорт скважинных данных для геонавигационного проекта",
+      "faultTreeNodeDictionaryId": 114,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Создание нового проекта в сетевой папке",
+      "faultTreeNodeDictionaryId": 115,
+      "target": {
+        "RTO": 36
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Создание в проекте новых скважин",
+      "faultTreeNodeDictionaryId": 116,
+      "target": {
+        "RTO": 36
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт данных по скважинам",
+      "faultTreeNodeDictionaryId": 117,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Импорт структурных поверхностей и контуров",
+      "faultTreeNodeDictionaryId": 118,
+      "target": {
+        "RTO": 72
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Настройка отображения планшетов и карт рабочей области (картожаных кривых ГИС, LWD и их граничных зачений, насыщения, литологии, траекторий, целевых точек и интервалов, элементов конструкции, пластопересечений, флюидальных контактов, структурных поверхностей)",
+      "faultTreeNodeDictionaryId": 119,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Получение первых данных с буровой",
+      "faultTreeNodeDictionaryId": 120,
+      "target": {
+        "RTO": 1
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Загрузка данных в профильное ПО",
+      "faultTreeNodeDictionaryId": 121,
+      "target": {
+        "RTO": 1
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Геологическая привязка по корреляционной схеме в Petrel",
+      "faultTreeNodeDictionaryId": 122,
+      "target": {
+        "RTO": 1
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Привязка фактического и синтетического каротажа в геонавигационном проекте Геонафт",
+      "faultTreeNodeDictionaryId": 123,
+      "target": {
+        "RTO": 1
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Формирование оперативного отчета excel Сетевые папки",
+      "faultTreeNodeDictionaryId": 124,
+      "target": {
+        "RTO": 72
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Формирование письма с рекомендацией на список рассылки MS Outlook Сопровождение мониторинга Непрерывное обработка (импорт в профильное ПО, обновление построений), поступающих данных",
+      "faultTreeNodeDictionaryId": 125,
+      "target": {
+        "RTO": 1
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Рассылка обновленных рекомендаций",
+      "faultTreeNodeDictionaryId": 126,
+      "target": {
+        "RTO": 10
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Архивирование электронной почты MS Outlook Подготовка финального отчета о проводке",
+      "faultTreeNodeDictionaryId": 127,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Актирование скважин",
+      "faultTreeNodeDictionaryId": 128,
+      "target": {
+        "RTO": 48
+      }
+    },
+    {
+      "nodeType": "BusinessFunction",
+      "name": "Обновление статистики по пробуренным скважинам",
+      "faultTreeNodeDictionaryId": 129,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItService",
+      "name": "MS Outlook работа с почтовыми сообщениями",
+      "faultTreeNodeDictionaryId": 1001
+    },
+    {
+      "nodeType": "ItService",
+      "name": "ГеоБД работа пользователя с системой",
+      "faultTreeNodeDictionaryId": 1002
+    },
+    {
+      "nodeType": "ItService",
+      "name": "Сетевые папки обращение к сетевым папкам пользователей",
+      "faultTreeNodeDictionaryId": 1003
+    },
+    {
+      "nodeType": "ItService",
+      "name": "Petrel многопользовательская работа",
+      "faultTreeNodeDictionaryId": 1004
+    },
+    {
+      "nodeType": "ItService",
+      "name": "Геонафт десктопное приложение",
+      "faultTreeNodeDictionaryId": 1005
+    },
+    {
+      "nodeType": "ItService",
+      "name": "Связь с буровой",
+      "faultTreeNodeDictionaryId": 1006
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Front-end сервер ГеоБД",
+      "faultTreeNodeDictionaryId": 1101,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Back-end сервер ГеоБД",
+      "faultTreeNodeDictionaryId": 1102,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервер баз данных ГеоБД",
+      "faultTreeNodeDictionaryId": 1103,
+      "target": {
+        "RTO": 8,
+        "RPO": 2
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Front-end сервер эл почты",
+      "faultTreeNodeDictionaryId": 1104,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервер электронной почты",
+      "faultTreeNodeDictionaryId": 1105,
+      "target": {
+        "RTO": 8,
+        "RPO": 1
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Архив электронной почты",
+      "faultTreeNodeDictionaryId": 1106,
+      "target": {
+        "RTO": 8,
+        "RPO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "SMTP-шлюзы",
+      "faultTreeNodeDictionaryId": 1107,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервис DevSecOps",
+      "faultTreeNodeDictionaryId": 1121,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервис точного времени",
+      "faultTreeNodeDictionaryId": 1122,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Канал связи Кустовая площадка",
+      "faultTreeNodeDictionaryId": 1108,
+      "target": {
+        "RTO": 16
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Инфраструктура сбора и передачи данных на буровой",
+      "faultTreeNodeDictionaryId": 1109,
+      "target": {
+        "RTO": 16,
+        "RPO": 1
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Рабочая станция пользователя",
+      "faultTreeNodeDictionaryId": 1110,
+      "target": {
+        "RTO": 4,
+        "RPO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Инфраструктура дисковой системы",
+      "faultTreeNodeDictionaryId": 1112,
+      "target": {
+        "RTO": 12,
+        "RPO": 24
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Анти-SPAM фильтры",
+      "faultTreeNodeDictionaryId": 1113,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервис WINS",
+      "faultTreeNodeDictionaryId": 1114,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервис DNS",
+      "faultTreeNodeDictionaryId": 1115,
+      "target": {
+        "RTO": 4
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Служба AD компании (авторизация пользователей)",
+      "faultTreeNodeDictionaryId": 1116,
+      "target": {
+        "RTO": 8,
+        "RPO": 24
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Инфраструктура как сервис (Виртуализация)",
+      "faultTreeNodeDictionaryId": 1111,
+      "target": {
+        "RTO": 16
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Сервис межсетевых экранов",
+      "faultTreeNodeDictionaryId": 1117,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Инфраструктура обеспечения площадок и параметров окружающей среды",
+      "faultTreeNodeDictionaryId": 1118,
+      "target": {
+        "RTO": 16
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Инфраструктура корпоративной локальной сети",
+      "faultTreeNodeDictionaryId": 1119,
+      "target": {
+        "RTO": 8
+      }
+    },
+    {
+      "nodeType": "ItResource",
+      "name": "Система резервного копирования данных",
+      "faultTreeNodeDictionaryId": 1120,
+      "target": {
+        "RTO": 8,
+        "RPO": 4
+      }
+    }
+  ]
+}
