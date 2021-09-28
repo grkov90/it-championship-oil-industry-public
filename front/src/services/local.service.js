@@ -44,7 +44,7 @@ export function reloadData(clear, newData) {
     Object.keys(data).forEach((key) => {
       setItem(key, data[key]);
     });
-    window.location.reload();
+    window.location.href = '/';
   }
 }
 
