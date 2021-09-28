@@ -1,5 +1,5 @@
 {
-  "dataVersion": "2021-09-28T13:43:47.487Z",
+  "dataVersion": "2021-09-28T22:28:10.912Z",
   "faultTrees": [
     {
       "faultTreeId": 1,
@@ -636,7 +636,9 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 6883580,
       "scenario": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 2,
+        "costRepair": 100000
       },
       "faultScenarioNodeId": 6226379
     },
@@ -644,7 +646,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10111,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 6646707
     },
@@ -652,7 +655,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10112,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 6956070
     },
@@ -660,7 +664,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10110,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 3225493
     },
@@ -668,7 +673,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10117,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 7043978
     },
@@ -676,7 +682,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10119,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 3370819
     },
@@ -684,7 +691,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10118,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 5262596
     },
@@ -692,7 +700,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10116,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 4394089
     },
@@ -700,7 +709,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10121,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 9905564
     },
@@ -708,7 +718,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10103,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 6444490
     },
@@ -716,7 +727,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10102,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 5519570
     },
@@ -724,7 +736,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10101,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 7008338
     },
@@ -732,7 +745,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10109,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 7629996
     },
@@ -740,7 +754,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10115,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 1732909
     },
@@ -748,7 +763,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10114,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 2073570
     },
@@ -756,7 +772,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10113,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 1109623
     },
@@ -764,7 +781,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10107,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 3208421
     },
@@ -772,7 +790,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10106,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 6461698
     },
@@ -780,7 +799,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10105,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 6650755
     },
@@ -788,7 +808,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10104,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 2003079
     },
@@ -796,7 +817,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10122,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 5097157
     },
@@ -804,7 +826,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10108,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       },
       "faultScenarioNodeId": 4640307
     },
@@ -813,7 +836,8 @@
       "faultScenarioId": 1,
       "faultTreeNodeId": 10120,
       "scenario": {
-        "RTO": 0
+        "RTO": 0,
+        "RPO": 0
       }
     }
   ],
@@ -844,7 +868,7 @@
       "name": "Падение эффективности проходки",
       "faultTreeNodeDictionaryId": 1,
       "target": {
-        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => RTOWaitTimeChildSum * 426e4"
+        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => (RTOWaitTimeChildSum + RPOWaitTimeChildSum) * 426e4"
       }
     },
     {
@@ -860,7 +884,7 @@
       "name": "Простой",
       "faultTreeNodeDictionaryId": 3,
       "target": {
-        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => 125e5* RTOWaitTimeChildSum"
+        "calculateDamageMoneyString": "(RTOWaitTimeChildSum, RPOWaitTimeChildSum) => 125e5* (RTOWaitTimeChildSum + RPOWaitTimeChildSum)"
       }
     },
     {
@@ -893,7 +917,8 @@
       "name": "Плановая траектория",
       "faultTreeNodeDictionaryId": 100,
       "target": {
-        "RTO": 72
+        "RTO": 72,
+        "RPO": 24
       }
     },
     {
@@ -901,7 +926,8 @@
       "name": "Маркшейдерская справка (привязка устья)",
       "faultTreeNodeDictionaryId": 101,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -909,7 +935,8 @@
       "name": "Целевой пласт",
       "faultTreeNodeDictionaryId": 102,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -917,7 +944,8 @@
       "name": "Экспорт скважин и скважинных данных БД",
       "faultTreeNodeDictionaryId": 103,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -925,7 +953,8 @@
       "name": "Экспорт поверхностей",
       "faultTreeNodeDictionaryId": 104,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -933,7 +962,8 @@
       "name": "Экспорт пластопересечений",
       "faultTreeNodeDictionaryId": 105,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -941,7 +971,8 @@
       "name": "Импорт скважин и скважинных данных",
       "faultTreeNodeDictionaryId": 106,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -949,7 +980,8 @@
       "name": "Импорт поверхностей",
       "faultTreeNodeDictionaryId": 107,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -957,7 +989,8 @@
       "name": "Импорт пластопересечений",
       "faultTreeNodeDictionaryId": 108,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -965,7 +998,8 @@
       "name": "Составление корреляционных схем по скважинам окружения",
       "faultTreeNodeDictionaryId": 109,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -973,7 +1007,8 @@
       "name": "Импорт плановых целей",
       "faultTreeNodeDictionaryId": 110,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -981,7 +1016,8 @@
       "name": "Импорт плановой траектории",
       "faultTreeNodeDictionaryId": 111,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -989,7 +1025,8 @@
       "name": "Проверка плановой траектории на выполнение геологических целей, геологическим построениям и оптимальности геометрии ствола",
       "faultTreeNodeDictionaryId": 112,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {
@@ -997,7 +1034,8 @@
       "name": "Настройка отображения планшетов и карт (для формирования отчетности)",
       "faultTreeNodeDictionaryId": 113,
       "target": {
-        "RTO": 72
+        "RTO": 72,
+        "RPO": 24
       }
     },
     {
@@ -1005,7 +1043,8 @@
       "name": "Экспорт скважинных данных для геонавигационного проекта",
       "faultTreeNodeDictionaryId": 114,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -1013,7 +1052,8 @@
       "name": "Создание нового проекта в сетевой папке",
       "faultTreeNodeDictionaryId": 115,
       "target": {
-        "RTO": 36
+        "RTO": 36,
+        "RPO": 24
       }
     },
     {
@@ -1021,7 +1061,8 @@
       "name": "Создание в проекте новых скважин",
       "faultTreeNodeDictionaryId": 116,
       "target": {
-        "RTO": 36
+        "RTO": 36,
+        "RPO": 24
       }
     },
     {
@@ -1029,7 +1070,8 @@
       "name": "Импорт данных по скважинам",
       "faultTreeNodeDictionaryId": 117,
       "target": {
-        "RTO": 4
+        "RTO": 4,
+        "RPO": 1
       }
     },
     {
@@ -1037,7 +1079,8 @@
       "name": "Импорт структурных поверхностей и контуров",
       "faultTreeNodeDictionaryId": 118,
       "target": {
-        "RTO": 72
+        "RTO": 72,
+        "RPO": 24
       }
     },
     {
@@ -1045,7 +1088,8 @@
       "name": "Настройка отображения планшетов и карт рабочей области (картожаных кривых ГИС, LWD и их граничных зачений, насыщения, литологии, траекторий, целевых точек и интервалов, элементов конструкции, пластопересечений, флюидальных контактов, структурных поверхностей)",
       "faultTreeNodeDictionaryId": 119,
       "target": {
-        "RTO": 4
+        "RTO": 4,
+        "RPO": 1
       }
     },
     {
@@ -1053,7 +1097,8 @@
       "name": "Получение первых данных с буровой",
       "faultTreeNodeDictionaryId": 120,
       "target": {
-        "RTO": 1
+        "RTO": 1,
+        "RPO": 1
       }
     },
     {
@@ -1061,7 +1106,8 @@
       "name": "Загрузка данных в профильное ПО",
       "faultTreeNodeDictionaryId": 121,
       "target": {
-        "RTO": 1
+        "RTO": 1,
+        "RPO": 1
       }
     },
     {
@@ -1069,7 +1115,8 @@
       "name": "Геологическая привязка по корреляционной схеме в Petrel",
       "faultTreeNodeDictionaryId": 122,
       "target": {
-        "RTO": 1
+        "RTO": 1,
+        "RPO": 1
       }
     },
     {
@@ -1077,7 +1124,8 @@
       "name": "Привязка фактического и синтетического каротажа в геонавигационном проекте Геонафт",
       "faultTreeNodeDictionaryId": 123,
       "target": {
-        "RTO": 1
+        "RTO": 1,
+        "RPO": 1
       }
     },
     {
@@ -1085,7 +1133,8 @@
       "name": "Формирование оперативного отчета excel Сетевые папки",
       "faultTreeNodeDictionaryId": 124,
       "target": {
-        "RTO": 72
+        "RTO": 72,
+        "RPO": 24
       }
     },
     {
@@ -1093,7 +1142,8 @@
       "name": "Формирование письма с рекомендацией на список рассылки MS Outlook Сопровождение мониторинга Непрерывное обработка (импорт в профильное ПО, обновление построений), поступающих данных",
       "faultTreeNodeDictionaryId": 125,
       "target": {
-        "RTO": 1
+        "RTO": 1,
+        "RPO": 1
       }
     },
     {
@@ -1101,7 +1151,8 @@
       "name": "Рассылка обновленных рекомендаций",
       "faultTreeNodeDictionaryId": 126,
       "target": {
-        "RTO": 10
+        "RTO": 10,
+        "RPO": 2
       }
     },
     {
@@ -1109,7 +1160,8 @@
       "name": "Архивирование электронной почты MS Outlook Подготовка финального отчета о проводке",
       "faultTreeNodeDictionaryId": 127,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -1117,7 +1169,8 @@
       "name": "Актирование скважин",
       "faultTreeNodeDictionaryId": 128,
       "target": {
-        "RTO": 48
+        "RTO": 48,
+        "RPO": 24
       }
     },
     {
@@ -1125,7 +1178,8 @@
       "name": "Обновление статистики по пробуренным скважинам",
       "faultTreeNodeDictionaryId": 129,
       "target": {
-        "RTO": 8
+        "RTO": 8,
+        "RPO": 8
       }
     },
     {

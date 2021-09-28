@@ -44,7 +44,9 @@ export function reloadData(clear, newData) {
     window.localStorage.clear();
   }
 
-  if (!localStorage.getItem('dataVersion')) {
+  const currentVersion = getItem('dataVersion');
+
+  if (!currentVersion) {
     Object.keys(data).forEach((key) => {
       setItem(key, data[key]);
     });
