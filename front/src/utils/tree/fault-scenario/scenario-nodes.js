@@ -114,7 +114,7 @@ export class BusinessFunctionScenarioNode {
 
     // Позитив должен обнуляться, негатив - идти на верх
     if (this.calculated.RPOWaitTime < 0) {
-      this.calculated.RPOwaitTime = 0;
+      this.calculated.RPOWaitTime = 0;
     }
   }
 
@@ -127,7 +127,7 @@ export class BusinessFunctionScenarioNode {
     return `RTO: ${this.scenario.RTO} ч.
 		RTO Время простоя: ${this.calculated.RTOWaitTime} ч.
 		RPO: ${this.scenario.RPO} ч.
-		RPO Время простоя: ${this.calculated.RPOWaitTime} ч.`;
+		RPO потеря данных за: ${this.calculated.RPOWaitTime} ч.`;
   }
 }
 
@@ -155,7 +155,7 @@ export class BusinessProcessScenarioNode {
 
   scenarioLabel() {
     return `RTO Максимальное время простоя: ${this.calculated.RTOWaitTimeMax} ч.
-    RPO Максимальное время простоя: ${this.calculated.RPOWaitTimeMax} ч.`;
+    RPO суммарно потеря данных за: ${this.calculated.RPOWaitTimeMax} ч.`;
   }
 }
 
