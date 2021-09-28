@@ -1,31 +1,31 @@
-name: Deploy
+name: Deploy fron to yandex bucket
 
 on:
-    push:
-        branches:
-            - main
+  push:
+    branches:
+      - main
 
 defaults:
   run:
     working-directory: front
 jobs:
-    deploy:
-        runs-on: ubuntu-latest        
-        steps:
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
-              with:
-                  node-version: '14'
-                  cache: 'yarn'              
-            # Build
-            - run: yarn --frozen-lockfile
-            - run: yarn build
-            # Deploy
-            - uses: nekitcorp/yandex-storage-website-action@v1                            
-              with:
-                  accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
-                  secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
-                  bucket: ${{ secrets.BUCKET }}
-                  path: "build"
-                  clear: true
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+          cache: 'yarn'
+      # Build
+      - run: yarn --frozen-lockfile
+      - run: yarn build
+      # Deploy
+      - uses: nekitcorp/yandex-storage-website-action@v1
+        with:
+          accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+          secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
+          bucket: ${{ secrets.BUCKET }}
+          path: "front_build"
+          clear: true
 
