@@ -21,11 +21,11 @@ jobs:
       - run: yarn --frozen-lockfile
       - run: yarn build
       # Deploy
-      - uses: nekitcorp/yandex-storage-website-action@v1
-        with:
-          accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
-          secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
-          bucket: ${{ secrets.BUCKET }}
-          path: "front_build"
-          clear: true
+      # - uses: nekitcorp/yandex-storage-website-action@v1
+      #  with:
+      #    accessKeyId: ${{ secrets.ACCESS_KEY_ID }}
+      #    secretAccessKey: ${{ secrets.SECRET_ACCESS_KEY }}
+      #    bucket: ${{ secrets.BUCKET }}
+      #    path: "front_build"
+      #    clear: true
 
