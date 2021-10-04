@@ -16,8 +16,8 @@
 
 <a name="1"></a>
 ## Видеопрезентация
-https://youtu.be/fRxoAhDgQq0
-[![Watch the video](https://img.youtube.com/vi/fRxoAhDgQq0/maxresdefault.jpg)](https://youtu.be/fRxoAhDgQq0)
+https://youtu.be/DArgKqUDBbM
+[![Watch the video](https://img.youtube.com/vi/DArgKqUDBbM/maxresdefault.jpg)](https://youtu.be/DArgKqUDBbM)
 
 <a name="2"></a>
 ## Цель прототипа
